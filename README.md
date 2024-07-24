@@ -4,8 +4,6 @@ Um sistema para gestão de atendimento multicanais centralizado.
 
 Esta versão foi trocada pela api [@whiskeysockets/baileys](https://github.com/WhiskeySockets/Baileys)
 
-Acesso instagram funcional somente use servidor no Brasil pois usa instagram web
-
 Novos recursos
 - Painel SaaS
 - Chat Interno
