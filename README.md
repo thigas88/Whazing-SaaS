@@ -30,7 +30,7 @@ Versão Premium*
 
 -Não posso possui limites
 
--  [Tabela de Valores](docs/Tabela de Valores.md)
+-  [Tabela de Valores versão premium e serviço de instalação](docs/TabeladeValores.md)
 
 Será iniciado cobranças a partir de 01/10/2024 caso você tenha sistema instalado com mais 10 usuários adquira licença antes dessa data.
 
