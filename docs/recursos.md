@@ -1,0 +1,13 @@
+# Principais Recursos
+- Painel SaaS
+- Chat Interno
+- Solicitar teste na pagina de login, e função esqueci a senha
+- Planos
+- Menu Ajuda
+- Integração bancaria recebimento PIX, verificar docs
+- Lista de Protocolos
+- Tela atendimento com varios filtros, separação por grupos
+- Mensagens rápidas com anexos
+- Importação mensagens celular
+- Importação contatos
+- Entre outros instale e teste para verificar mais detalhes

@@ -11,26 +11,28 @@ Novos recursos
 - Planos
 - Menu Ajuda
 - Integração bancaria recebimento PIX, verificar docs
+- -  [Mais informações de recursos](docs/recursos.md)
 
 Dados de Acesso
 
 admin@admin.com
 123456
 
+Caso apresente algum bug abra um Issues com maximo de detalhes possiveis
 
 **IMPORTANTE**: 
-Versão grátis disponivel nesse repositorio*
+Versão grátis* - para sempre não tera bloqueios
 
-- Limite 10 usuários e 2 canais
+- Limites da versão grátis 10 usuários e 2 canais
 
 
-Versão Premium
+Versão Premium*
 
 -Não posso possui limites
 
-Essa versão ja está codigo inicial (webhook) para validar licença.
-*Durante a fase beta os recursos premium estaram liberados para todos
+-  [Tabela de Valores versão premium e serviço de instalação](docs/Tabela de Valores.md)
 
+Será iniciado cobranças a partir de 01/10/2024 caso você tenha sistema instalado com mais 10 usuários adquira licença antes dessa data.
 
 ## Screenshots
 >![print](screenshots/saas.png) 
