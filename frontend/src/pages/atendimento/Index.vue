@@ -75,7 +75,7 @@
           <div class="row-buttons full-width">
             <q-btn flat class="bg-grey-3 btn-rounded-50" :color="cFiltroSelecionado ? 'deep-orange-9' : 'primary'" style="flex: 1;">
               Filtro
-            <q-menu content-class="shadow-10 no-scroll container-rounded-10">
+            <q-menu content-class="shadow-10 no-scroll container-rounded-10 max-height-none" style="max-height: 100vh !important">
               <div class="row q-pa-sm" style="min-width: 350px; max-width: 350px">
                 <div class="q-ma-sm">
                   <div class="text-h6 q-mb-md font-family-main">Filtros Avançados</div>
@@ -87,6 +87,7 @@
                     :class="{ 'q-mb-lg': pesquisaTickets.showAll }"
                     @input="debounce(BuscarTicketFiltro(), 700)"
                   />
+                  <q-toggle toggle-indeterminate v-model="ordenar" label="Ordenar por data de criação" @input="loadOrdenar()" />
                   <q-separator class="q-mb-md" v-if="!pesquisaTickets.showAll" />
                   <div v-if="!pesquisaTickets.showAll">
                     <q-select
@@ -157,7 +158,7 @@
             </q-menu>
             <q-tooltip content-class="text-bold"> Filtro Avançado </q-tooltip>
           </q-btn>
-          <q-btn flat class="bg-grey-3 btn-rounded-50" :class="$q.dark.isActive ? 'text-white bg-black' : ''" @click="$q.screen.lt.md ? (modalNovoTicket = true) : $router.push({ name: 'chat-contatos' })" style="flex: 1;">
+          <q-btn flat class="bg-grey-3 btn-rounded-50" :class="$q.dark.isActive ? 'text-white bg-black' : ''" @click="$q.screen.lt.md ? (modalNovoTicket = true) : $router.push({ name: 'chat-contatos' })" style="flex: 1;" v-if="canAccessPageContact">
             Contatos
           <q-tooltip :content-class="`${$q.dark.isActive ? 'text-white bg-black' : ''} text-bold`">Contatos</q-tooltip>
           </q-btn>
@@ -330,7 +331,7 @@
                 <q-tooltip content-class="bg-padrao text-grey-9 text-bold"> Tickets fechados </q-tooltip>
               </q-tab>
               <q-tab
-                v-if="chatBotLane === 'enabled'"
+                v-if="chatbotLane === 'enabled'"
                 :ripple="false"
                 name="chatbot"
                 icon="mdi-robot-outline"
@@ -862,6 +863,7 @@ export default {
         includeNotQueueDefined: true
         // date: new Date(),
       },
+      ordernar: null,
       filter: false,
       filas: [],
       filasUser: [],
@@ -874,11 +876,16 @@ export default {
       drawerContact: false,
       contadorUniversal: '',
       tempoFechamento: '',
-      autoFechamentoAtivo: 'disabled',
+      autoFechamentoAtivo: '',
+	  ContactAdmin: null,
+      chatbotLane: null,
       mensagemDeEncerramento: ''
     }
   },
   computed: {
+    canAccessPageContact() {
+      return this.ContactAdmin !== 'enabled' || this.userProfile === 'admin';
+    },
     ...mapGetters([
       'tickets',
       'ticketFocado',
@@ -912,95 +919,361 @@ export default {
     },
     openTickets() {
       const filteredTickets = this.tickets.filter(ticket => ticket.status === 'open' && !ticket.isGroup)
-      const groupedTickets = filteredTickets.reduce((acc, ticket) => {
-        const key = `${ticket.whatsappId}_${ticket.userId}_${ticket.status}_${ticket.contactId}`
+      let tickets = filteredTickets;
+      console.log(tickets);
+      if(this.ordenar == true){
+        tickets.sort((a,b)=>{
+          let data1 = new Date(a.updatedAt);
+          let data2 = new Date(b.updatedAt);
+          if(data1.getTime() > data2.getTime()){
+            return 1;
+          }
+          if(data1.getTime() < data2.getTime()){
+            return -1;
+          }
+          return 0;
+          })
+      }
+      if(this.ordenar == false){
+        tickets.sort((a,b)=>{
+          let data1 = new Date(a.updatedAt);
+          let data2 = new Date(b.updatedAt);
+          if(data1.getTime() < data2.getTime()){
+            return 1;
+          }
+          if(data1.getTime() > data2.getTime()){
+            return -1;
+          }
+          return 0;
+          })
+      }
+      const groupedTickets = tickets.reduce((acc, ticket) => {
+        const key = `${ticket.whatsappId}_${ticket.userId}_${ticket.status}_${ticket.contactId}`;
         if (!acc[key] || acc[key].id > ticket.id) {
-          acc[key] = ticket
+          acc[key] = ticket;
         }
-        return acc
-      }, {})
-      const groupedTicketIds = new Set(Object.values(groupedTickets).map(ticket => ticket.id))
-      const remainingTickets = filteredTickets.filter(ticket => !groupedTicketIds.has(ticket.id))
+        return acc;
+      }, {});
+      const groupedTicketIds = new Set(Object.values(groupedTickets).map(ticket => ticket.id));
+      const remainingTickets = filteredTickets.filter(ticket => !groupedTicketIds.has(ticket.id));      
       remainingTickets.forEach(ticket => {
-        AtualizarStatusTicketNull(ticket.id, 'closed', ticket.userId)
-        // console.log(`Ticket duplo ${ticket.id} tratado.`);
-      })
+        AtualizarStatusTicketNull(ticket.id, 'closed', ticket.userId);
+        console.log(`Ticket duplo ${ticket.id} tratado.`);
+      });
       // return Object.values(groupedTickets).slice(0, this.batchSize);
       return Object.values(groupedTickets)
     },
     pendingTickets() {
+      
       const filteredTickets = this.tickets.filter(ticket => ticket.status === 'pending' && !ticket.isGroup)
-      const groupedTickets = filteredTickets.reduce((acc, ticket) => {
-        const key = `${ticket.whatsappId}_${ticket.userId}_${ticket.status}_${ticket.contactId}`
+      let tickets = filteredTickets;
+      if(this.ordenar == true){
+        tickets.sort((a,b)=>{
+          let data1 = new Date(a.updatedAt);
+          let data2 = new Date(b.updatedAt);
+          if(data1.getTime() > data2.getTime()){
+            return 1;
+          }
+          if(data1.getTime() < data2.getTime()){
+            return -1;
+          }
+          return 0;
+          })
+      }
+      if(this.ordenar == false){
+        tickets.sort((a,b)=>{
+          let data1 = new Date(a.updatedAt);
+          let data2 = new Date(b.updatedAt);
+          if(data1.getTime() < data2.getTime()){
+            return 1;
+          }
+          if(data1.getTime() > data2.getTime()){
+            return -1;
+          }
+          return 0;
+          })
+      }
+      const groupedTickets = tickets.reduce((acc, ticket) => {
+        const key = `${ticket.whatsappId}_${ticket.userId}_${ticket.status}_${ticket.contactId}`;
         if (!acc[key] || acc[key].id > ticket.id) {
-          acc[key] = ticket
+          acc[key] = ticket;
         }
-        return acc
-      }, {})
-      const groupedTicketIds = new Set(Object.values(groupedTickets).map(ticket => ticket.id))
-      const remainingTickets = filteredTickets.filter(ticket => !groupedTicketIds.has(ticket.id))
+        return acc;
+      }, {});
+      const groupedTicketIds = new Set(Object.values(groupedTickets).map(ticket => ticket.id));
+      const remainingTickets = filteredTickets.filter(ticket => !groupedTicketIds.has(ticket.id));      
       remainingTickets.forEach(ticket => {
-        AtualizarStatusTicketNull(ticket.id, 'closed', ticket.userId)
-        // console.log(`Ticket duplo ${ticket.id} tratado.`);
-      })
+        AtualizarStatusTicketNull(ticket.id, 'closed', ticket.userId);
+        console.log(`Ticket duplo ${ticket.id} tratado.`);
+      });
       return Object.values(groupedTickets)
       // return Object.values(groupedTickets).slice(0, this.batchSize);
     },
     pendingTicketsChatBot() {
       // return this.tickets.filter(ticket => ticket.status === 'pending' && !ticket.isGroup)
-      const filteredTickets = this.tickets.filter(ticket => ticket.status === 'pending' && !ticket.isGroup && (ticket.stepAutoReplyId && ticket.autoReplyId || ticket.chatFlowId && ticket.stepChatFlow))
-      const groupedTickets = filteredTickets.reduce((acc, ticket) => {
-        const key = `${ticket.whatsappId}_${ticket.userId}_${ticket.status}_${ticket.contactId}`
+      const filteredTickets = this.tickets.filter(ticket => ticket.status === 'pending' && !ticket.isGroup && (ticket.stepAutoReplyId && ticket.autoReplyId || ticket.chatFlowId && ticket.stepChatFlow));
+      let tickets = filteredTickets;
+      if(this.ordenar == true){
+        tickets.sort((a,b)=>{
+          let data1 = new Date(a.updatedAt);
+          let data2 = new Date(b.updatedAt);
+          if(data1.getTime() > data2.getTime()){
+            return 1;
+          }
+          if(data1.getTime() < data2.getTime()){
+            return -1;
+          }
+          return 0;
+          })
+      }
+      if(this.ordenar == false){
+        tickets.sort((a,b)=>{
+          let data1 = new Date(a.updatedAt);
+          let data2 = new Date(b.updatedAt);
+          if(data1.getTime() < data2.getTime()){
+            return 1;
+          }
+          if(data1.getTime() > data2.getTime()){
+            return -1;
+          }
+          return 0;
+          })
+      }
+      const groupedTickets = tickets.reduce((acc, ticket) => {
+        const key = `${ticket.whatsappId}_${ticket.userId}_${ticket.status}_${ticket.contactId}`;
         if (!acc[key] || acc[key].id > ticket.id) {
-          acc[key] = ticket
+          acc[key] = ticket;
         }
-        return acc
-      }, {})
-      return Object.values(groupedTickets)
+        return acc;
+      }, {});
+      return Object.values(groupedTickets);
       // return Object.values(groupedTickets).slice(0, this.batchSize);
     },
     closedTickets() {
-      return this.tickets.filter(ticket => ticket.status === 'closed' && !ticket.isGroup)
+      let tickets = this.tickets;
+      if(this.ordenar == true){
+        tickets.sort((a,b)=>{
+          let data1 = new Date(a.updatedAt);
+          let data2 = new Date(b.updatedAt);
+          if(data1.getTime() > data2.getTime()){
+            return 1;
+          }
+          if(data1.getTime() < data2.getTime()){
+            return -1;
+          }
+          return 0;
+          })
+      }
+      if(this.ordenar == false){
+        tickets.sort((a,b)=>{
+          let data1 = new Date(a.updatedAt);
+          let data2 = new Date(b.updatedAt);
+          if(data1.getTime() < data2.getTime()){
+            return 1;
+          }
+          if(data1.getTime() > data2.getTime()){
+            return -1;
+          }
+          return 0;
+          })
+      }
+      return tickets.filter(ticket => ticket.status === 'closed' && !ticket.isGroup)
       // return this.tickets.filter(ticket => ticket.status === 'closed' && !ticket.isGroup).slice(0, this.batchSize);
     },
     closedGroupTickets() {
-      return this.tickets.filter(ticket => ticket.status === 'closed' && ticket.isGroup)
+      let tickets = this.tickets;
+      if(this.ordenar == true){
+        tickets.sort((a,b)=>{
+          let data1 = new Date(a.updatedAt);
+          let data2 = new Date(b.updatedAt);
+          if(data1.getTime() > data2.getTime()){
+            return 1;
+          }
+          if(data1.getTime() < data2.getTime()){
+            return -1;
+          }
+          return 0;
+          })
+      }
+      if(this.ordenar == false){
+        tickets.sort((a,b)=>{
+          let data1 = new Date(a.updatedAt);
+          let data2 = new Date(b.updatedAt);
+          if(data1.getTime() < data2.getTime()){
+            return 1;
+          }
+          if(data1.getTime() > data2.getTime()){
+            return -1;
+          }
+          return 0;
+          })
+      }
+      return tickets.filter(ticket => ticket.status === 'closed' && ticket.isGroup)
       // return this.tickets.filter(ticket => ticket.status === 'closed' && ticket.isGroup).slice(0, this.batchSize);
     },
     openGroupTickets() {
       // return this.tickets.filter(ticket => ticket.status === 'open' && ticket.isGroup)
-      const filteredTickets = this.tickets.filter(ticket => ticket.status === 'open' && ticket.isGroup)
-      const groupedTickets = filteredTickets.reduce((acc, ticket) => {
-        const key = `${ticket.whatsappId}_${ticket.userId}_${ticket.status}_${ticket.contactId}`
+      const filteredTickets = this.tickets.filter(ticket => ticket.status === 'open' && ticket.isGroup);
+      let tickets = filteredTickets;
+      if(this.ordenar == true){
+        tickets.sort((a,b)=>{
+          let data1 = new Date(a.updatedAt);
+          let data2 = new Date(b.updatedAt);
+          if(data1.getTime() > data2.getTime()){
+            return 1;
+          }
+          if(data1.getTime() < data2.getTime()){
+            return -1;
+          }
+          return 0;
+          })
+      }
+      if(this.ordenar == false){
+        tickets.sort((a,b)=>{
+          let data1 = new Date(a.updatedAt);
+          let data2 = new Date(b.updatedAt);
+          if(data1.getTime() < data2.getTime()){
+            return 1;
+          }
+          if(data1.getTime() > data2.getTime()){
+            return -1;
+          }
+          return 0;
+          })
+      }
+      const groupedTickets = tickets.reduce((acc, ticket) => {
+        const key = `${ticket.whatsappId}_${ticket.userId}_${ticket.status}_${ticket.contactId}`;
         if (!acc[key] || acc[key].id > ticket.id) {
-          acc[key] = ticket
+          acc[key] = ticket;
         }
-        return acc
-      }, {})
-      return Object.values(groupedTickets)
+        return acc;
+      }, {});
+      return Object.values(groupedTickets);
       // return Object.values(groupedTickets).slice(0, this.batchSize);
     },
     pendingGroupTickets() {
       // return this.tickets.filter(ticket => ticket.status === 'pending' && ticket.isGroup)
-      const filteredTickets = this.tickets.filter(ticket => ticket.status === 'pending' && ticket.isGroup)
-      const groupedTickets = filteredTickets.reduce((acc, ticket) => {
-        const key = `${ticket.whatsappId}_${ticket.userId}_${ticket.status}_${ticket.contactId}`
+      const filteredTickets = this.tickets.filter(ticket => ticket.status === 'pending' && ticket.isGroup);
+      let tickets = filteredTickets;
+      if(this.ordenar == true){
+        tickets.sort((a,b)=>{
+          let data1 = new Date(a.updatedAt);
+          let data2 = new Date(b.updatedAt);
+          if(data1.getTime() > data2.getTime()){
+            return 1;
+          }
+          if(data1.getTime() < data2.getTime()){
+            return -1;
+          }
+          return 0;
+          })
+      }
+      if(this.ordenar == false){
+        tickets.sort((a,b)=>{
+          let data1 = new Date(a.updatedAt);
+          let data2 = new Date(b.updatedAt);
+          if(data1.getTime() < data2.getTime()){
+            return 1;
+          }
+          if(data1.getTime() > data2.getTime()){
+            return -1;
+          }
+          return 0;
+          })
+      }
+      const groupedTickets = tickets.reduce((acc, ticket) => {
+        const key = `${ticket.whatsappId}_${ticket.userId}_${ticket.status}_${ticket.contactId}`;
         if (!acc[key] || acc[key].id > ticket.id) {
-          acc[key] = ticket
+          acc[key] = ticket;
         }
-        return acc
-      }, {})
-      return Object.values(groupedTickets)
+        return acc;
+      }, {});
+      return Object.values(groupedTickets);
       // return Object.values(groupedTickets).slice(0, this.batchSize);
     },
     privateMessages() {
-      return this.tickets.filter(ticket => ticket.unreadMessages && !ticket.isGroup)
+      let tickets = this.tickets;
+      if(this.ordenar == true){
+        tickets.sort((a,b)=>{
+          let data1 = new Date(a.updatedAt);
+          let data2 = new Date(b.updatedAt);
+          if(data1.getTime() > data2.getTime()){
+            return 1;
+          }
+          if(data1.getTime() < data2.getTime()){
+            return -1;
+          }
+          return 0;
+          })
+      }
+      if(this.ordenar == false){
+        tickets.sort((a,b)=>{
+          let data1 = new Date(a.updatedAt);
+          let data2 = new Date(b.updatedAt);
+          if(data1.getTime() < data2.getTime()){
+            return 1;
+          }
+          if(data1.getTime() > data2.getTime()){
+            return -1;
+          }
+          return 0;
+          })
+      }
+      return tickets.filter(ticket => ticket.unreadMessages && !ticket.isGroup)
     },
     groupMessages() {
-      return this.tickets.filter(ticket => ticket.unreadMessages && ticket.isGroup)
+      let tickets = this.tickets;
+      if(this.ordenar == true){
+        tickets.sort((a,b)=>{
+          let data1 = new Date(a.updatedAt);
+          let data2 = new Date(b.updatedAt);
+          if(data1.getTime() > data2.getTime()){
+            return 1;
+          }
+          if(data1.getTime() < data2.getTime()){
+            return -1;
+          }
+          return 0;
+          })
+      }
+      if(this.ordenar == false){
+        tickets.sort((a,b)=>{
+          let data1 = new Date(a.updatedAt);
+          let data2 = new Date(b.updatedAt);
+          if(data1.getTime() < data2.getTime()){
+            return 1;
+          }
+          if(data1.getTime() > data2.getTime()){
+            return -1;
+          }
+          return 0;
+          })
+      }
+      return tickets.filter(ticket => ticket.unreadMessages && ticket.isGroup)
     }
   },
   methods: {
+    async loadOrdenar() {
+      try{
+        this.$store.commit('RESET_TICKETS')
+        this.loading = true
+        switch (this.ordenar){
+          case false:
+          this.ordenar = null;
+          break;
+          case true:
+          this.ordenar = false;
+          break;
+          case null:
+          this.ordenar = true;
+          break;
+          
+        }
+        this.consultarTicketsOrdenados()
+      }catch(error){
+        console.log(error)
+      }
+    },
     async atualizarUsuario() {
       try {
         const { data } = await DadosUsuario(this.usuario.userId)
@@ -1133,10 +1406,10 @@ export default {
         // history.push(`/tickets/${ticket.id}`);
       }
 
-      this.$nextTick(() => {
+     // this.$nextTick(() => {
         // utilizar refs do layout
-        this.$refs.audioNotificationPlay.play()
-      })
+      //  this.$refs.audioNotificationPlay.play()
+     // })
     },
     async listarConfiguracoes () {
       const { data } = await ListarConfiguracoes()
@@ -1151,6 +1424,10 @@ export default {
       this.autoFechamentoAtivo = autoClose.value
       const autoCloseMessage = data.find(config => config.key === 'autoCloseMessage')
       this.mensagemDeEncerramento = autoCloseMessage.value
+      const ContactAdmin = data.find(config => config.key === 'ContactAdmin')
+      this.ContactAdmin = ContactAdmin.value
+      const chatbotLane = data.find(config => config.key === 'chatbotLane')
+      this.chatbotLane = chatbotLane.value
       // await this.autoCloseTickets(this.tempoFechamento, this.mensagemDeEncerramento)
     },
     onScroll (info) {
@@ -1170,10 +1447,64 @@ export default {
         ...paramsInit
       }
       try {
-        const { data } = await ConsultarTickets(params)
+        let { data } = await ConsultarTickets(params)
         this.countTickets = data.count // count total de tickets no status
         this.$store.commit('LOAD_TICKETS', data.tickets)
         this.$store.commit('SET_HAS_MORE', data.hasMore)
+      } catch (err) {
+        this.$notificarErro('Algum problema', err)
+        console.error(err)
+      }
+      // return () => clearTimeout(delayDebounceFn)
+    },
+    async consultarTicketsOrdenados (paramsInit = {}) {
+      const params = {
+        ...this.pesquisaTickets,
+        ...paramsInit
+      }
+      try {
+        let { data } = await ConsultarTickets(params)
+        this.countTickets = data.count
+
+        let tickets = data.tickets;
+
+        if(this.ordenar == true){
+          tickets.sort((a,b)=>{
+          let data1 = new Date(a.updatedAt);
+          let data2 = new Date(b.updatedAt);
+          if(data1.getTime() > data2.getTime()){
+            return 1;
+          }
+          if(data1.getTime() < data2.getTime()){
+            return -1;
+          }
+          return 0;
+          })
+          this.$store.commit('LOAD_TICKETS', tickets);
+        }
+        if(this.ordenar == false){
+          tickets.sort((a,b)=>{
+          let data1 = new Date(a.updatedAt);
+          let data2 = new Date(b.updatedAt);
+          if(data1.getTime() > data2.getTime()){
+            return 1;
+          }
+          if(data1.getTime() < data2.getTime()){
+            return -1;
+          }
+          return 0;
+        })
+        this.$store.commit('LOAD_TICKETS', tickets);
+        }
+        if(this.ordenar == null){
+          this.$store.commit('LOAD_TICKETS', tickets);
+        }
+
+        
+        this.$store.commit('SET_HAS_MORE', data.hasMore)
+
+        console.log(tickets)
+        
       } catch (err) {
         this.$notificarErro('Algum problema', err)
         console.error(err)

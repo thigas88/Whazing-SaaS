@@ -1,5 +1,18 @@
 <template>
   <div>
+    <div v-if="!canAccessPage">
+      <q-banner dense inline-actions class="bg-red text-white">
+        <template v-slot:avatar>
+          <q-icon name="warning" />
+        </template>
+        Somente administradores podem acessar esta página.
+        <template v-slot:action>
+          <q-btn flat dense @click="redirectHome">OK</q-btn>
+        </template>
+      </q-banner>
+    </div>
+  <div>
+    <div v-if="canAccessPage">
     <q-table
       class="contact-table my-sticky-dynamic container-rounded-10"
       title="Contatos"
@@ -421,6 +434,7 @@
         </q-card-actions>
       </q-card>
     </q-dialog>
+    </div>
   </div>
 </template>
 
@@ -433,6 +447,7 @@ import { ListarUsuarios } from 'src/service/user'
 import { ListarEtiquetas } from 'src/service/etiquetas'
 import { mapGetters } from 'vuex'
 import { ListarFilas } from 'src/service/filas'
+import { ListarConfiguracoes } from 'src/service/configuracoes'
 
 export default {
   name: 'IndexContatos',
@@ -446,6 +461,9 @@ export default {
     }
   },
   computed: {
+    canAccessPage() {
+      return this.ContactAdmin !== 'enabled' || this.userProfile === 'admin';
+    },
     ...mapGetters(['whatsapps'])
   },
   data () {
@@ -456,6 +474,8 @@ export default {
       filas: [],
       usuariosTransferencia: [],
       contacts: [],
+	  userProfile: 'user',
+      ContactAdmin: null,
       ticketFocado: '',
       modalImportarContatos: false,
       modalContato: false,
@@ -541,6 +561,15 @@ export default {
     }
   },
   methods: {
+    redirectHome() {
+      this.$router.push('/');
+    },
+    async listarConfiguracoes () {
+      const { data } = await ListarConfiguracoes()
+      localStorage.setItem('configuracoes', JSON.stringify(data))
+      const ContactAdmin = data.find(config => config.key === 'ContactAdmin')
+      this.ContactAdmin = ContactAdmin.value
+    },
     formatTags(tags) {
       if (!Array.isArray(tags)) return ''
 
@@ -973,6 +1002,7 @@ export default {
     }
   },
   mounted () {
+    this.listarConfiguracoes()
     this.usuario = JSON.parse(localStorage.getItem('usuario'))
     this.userProfile = localStorage.getItem('profile')
     this.listarContatos()

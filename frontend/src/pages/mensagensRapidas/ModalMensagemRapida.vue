@@ -46,6 +46,24 @@
                 />
               </q-menu>
             </q-btn>
+            <q-btn round flat class="q-ml-sm">
+            <q-icon size="2em" name="mdi-variable" />
+            <q-tooltip>
+              Variáveis
+            </q-tooltip>
+            <q-menu touch-position>
+              <q-list dense
+                style="min-width: 100px">
+                <q-item v-for="variavel in variaveis"
+                  :key="variavel.label"
+                  clickable
+                  @click="onInsertSelectVariable(variavel.value)"
+                  v-close-popup>
+                  <q-item-section>{{ variavel.label }}</q-item-section>
+                </q-item>
+              </q-list>
+            </q-menu>
+          </q-btn>
           </div>
           <div class="col-xs-8 col-sm-10 col-md-11 q-pl-sm">
             <label class="text-caption">Mensagem:</label>
@@ -106,12 +124,38 @@ export default {
         medias: null
       },
       arquivoCarregado: null,
-      loading: false
+      loading: false,
+      variaveis: [
+        { label: 'Nome', value: '{{name}}' },
+        { label: 'Saudação', value: '{{greeting}}' },
+        { label: 'Protocolo', value: '{{protocol}}' },
+      ]
     }
   },
   methods: {
     limparArquivo() {
       this.arquivoCarregado = null
+    },
+    onInsertSelectVariable (variable) {
+      const self = this
+      var tArea = this.$refs.inputEnvioMensagem
+      // get cursor's position:
+      var startPos = tArea.selectionStart,
+        endPos = tArea.selectionEnd,
+        cursorPos = startPos,
+        tmpStr = tArea.value
+      // filter:
+      if (!variable) {
+        return
+      }
+      // insert:
+      self.txtContent = this.mensagemRapida.message
+      self.txtContent = tmpStr.substring(0, startPos) + variable + tmpStr.substring(endPos, tmpStr.length)
+      this.mensagemRapida.message = self.txtContent
+      // move cursor:
+      setTimeout(() => {
+        tArea.selectionStart = tArea.selectionEnd = cursorPos + 1
+      }, 10)
     },
     onInsertSelectEmoji (emoji) {
       const self = this
@@ -152,13 +196,6 @@ export default {
         this.$q.notify({
           type: 'negative',
           message: 'A chave não pode estar em branco.'
-        })
-        return
-      }
-      if (this.mensagemRapida.message && this.arquivoCarregado) {
-        this.$q.notify({
-          type: 'negative',
-          message: 'Você não pode preencher a mensagem e escolher um arquivo ao mesmo tempo. Por favor, escolha apenas um.'
         })
         return
       }

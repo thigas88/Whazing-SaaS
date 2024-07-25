@@ -74,16 +74,6 @@ export function UpdateOpenIAWhatsapp(whatsAppId, data) {
   })
 }
 
-export function SyncOldMessagesWbot(data) {
-  return request({
-    url: `/whatsapp/sync/${data.whatsappId}`,
-    method: 'post',
-    data: {
-      quantity: data.limit,
-      tenantId: data.tenantId
-    }
-  })
-}
 
 // api.put(`/whatsapp/${whatsAppId}`, {
 //   name: values.name,

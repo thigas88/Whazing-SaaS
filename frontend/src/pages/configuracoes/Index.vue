@@ -31,6 +31,39 @@
             unchecked-icon="clear" @input="atualizarConfiguracao('NotViewTicketsChatBot')" />
         </q-item-section>
       </q-item>
+	  
+      <q-item class="config-item" tag="label" v-ripple>
+        <q-item-section>
+          <q-item-label>Habilitar guia de atendimento de Chatbots</q-item-label>
+          <q-item-label caption> Habilitando esta opção será adicionada uma guia de atendimento exclusiva para os chatbots. </q-item-label>
+        </q-item-section>
+
+      <q-item-section avatar>
+        <q-toggle
+            v-model="chatbotLane"
+            false-value="disabled"
+            true-value="enabled"
+            checked-icon="check"
+            keep-color
+            :color="chatbotLane === 'enabled' ? 'green' : 'negative'"
+            size="md"
+            unchecked-icon="clear"
+            @input="atualizarConfiguracao('chatbotLane')"
+        />
+        </q-item-section>
+      </q-item>
+	  
+      <q-item tag="label" v-ripple>
+        <q-item-section>
+          <q-item-label>Somente administradores podem acessar os lista de contatos</q-item-label>
+          <q-item-label caption>Somente os administradores visualizarão lista de contatos no sistema.</q-item-label>
+        </q-item-section>
+        <q-item-section avatar>
+          <q-toggle v-model="ContactAdmin" false-value="disabled" true-value="enabled" checked-icon="check"
+            keep-color :color="ContactAdmin === 'enabled' ? 'green' : 'negative'" size="md"
+            unchecked-icon="clear" @input="atualizarConfiguracao('ContactAdmin')" />
+        </q-item-section>
+      </q-item>
 
       <q-item tag="label" v-ripple>
         <q-item-section>
@@ -255,6 +288,7 @@ export default {
       listaChatFlow: [],
       NotViewAssignedTickets: null,
       NotViewTicketsChatBot: null,
+	  ContactAdmin: null,
       DirectTicketsToWallets: null,
       botTicketActive: null,
       ignoreGroupMsg: null,
@@ -268,6 +302,7 @@ export default {
       autoClose: null,
       autoCloseTime: null,
       autoCloseMessage: '',
+      chatbotLane: null,
       callRejectMessage: ''
     }
   },

@@ -22,55 +22,32 @@
             Transferir Atendimento entre Usuários
           </q-tooltip>
         </q-btn> -->
-          <!--  <q-btn @click="fecharTicketsAbertos"
-            color="primary"
-            label="atendimentos abertos"
-            icon="mdi-close"
-            class="btn-rounded-50">
-          <q-tooltip content-class="bg-primary text-bold">
-            Fechar Atendimentos Abertos
-          </q-tooltip>
-        </q-btn>
-        <q-btn @click="fecharTicketsPendentes"
+        <q-btn @click="fecharTicketsEmMassa"
             flat
             icon="mdi-close"
-            label="atendimentos pendentes"
+            label="Fechamento tickets em Massa"
             class="generate-button btn-rounded-50"
             :class="{'generate-button-dark' : $q.dark.isActive}">
 
           <q-tooltip content-class="text-bold">
-            Fechar Atendimentos Pendentes
+            Fechamento tickets em Massa
           </q-tooltip>
         </q-btn>
+
+        <q-btn @click="apagarTicketsMassa"
+            flat
+            icon="mdi-close"
+            label="Apagar tickets em Massa"
+            class="generate-button btn-rounded-50"
+            :class="{'generate-button-dark' : $q.dark.isActive}">
+
+          <q-tooltip content-class="text-bold">
+            Apagar tickets em Massa
+          </q-tooltip>
+        </q-btn>
+		
       </div>
     </div>
-
-    <!-- <div class="row col q-pa-md justify-between items-center">
-      <h1> Painel Atendimentos </h1>
-        <q-btn color="primary"
-          icon="mdi-filter"
-          label="Filtros"
-          @click="visualizarFiltros = true" />
-        <q-btn @click="listarUsuarios2"
-            flat
-            color="primary"
-            class="bg-padrao btn-rounded">
-          <q-icon name="mdi-transfer" />
-          <q-tooltip content-class="bg-primary text-bold">
-            Transferir Tickets entre Usuários
-          </q-tooltip>
-        </q-btn>
-        <q-btn @click="fecharTicketsPendentes"
-            flat
-            color="primary"
-            class="bg-padrao btn-rounded">
-          <q-icon name="mdi-transfer" />
-          <q-tooltip content-class="bg-primary text-bold">
-            Fechar Tickets Pendentes
-          </q-tooltip>
-        </q-btn>
-      <q-separator />
-    </div> -->
 
     <q-dialog full-height
       position="left"
@@ -80,10 +57,10 @@
           <div class="text-h6">Filtros</div>
         </q-card-section>
         <q-card-section class="q-gutter-md">
-          <DatePick dense
+          <DatePick  dense rounded outlined
             class="row col"
             v-model="pesquisaTickets.dateStart" />
-          <DatePick dense
+          <DatePick  dense rounded outlined
             class="row col"
             v-model="pesquisaTickets.dateEnd" />
           <q-separator v-if="profile === 'admin'" />
@@ -213,142 +190,186 @@
       </template>
     </div>
 
-    <q-dialog v-model="modalTransferirTicket"
-      @hide="modalTransferirTicket = false"
+    <q-dialog v-model="modaFecharMassa"
+      @hide="modaFecharMassa = false"
       persistent>
-      <q-card class="q-pa-md"
-        style="width: 500px">
-        <q-card-section>
-          <div class="text-h6">Transferir todos os atendimentos sem fila</div>
-          <div class="text-h8">Selecione o destino (atendimentos sem fila):</div>
-        </q-card-section>
-        <q-card-section>
-          <q-select square
-            outlined
-            v-model="filaSelecionada"
-            :options="filas"
-            emit-value
-            map-options
-            option-value="id"
-            option-label="queue"
-            label="Fila de destino" />
-        </q-card-section>
-        <q-card-section>
-          <q-select square
-            outlined
-            v-model="usuarioSelecionado"
-            :options="usuarios.filter(filterUsers)"
-            emit-value
-            map-options
-            option-value="id"
-            option-label="name"
-            label="Usuário destino" />
-        </q-card-section>
-        <q-card-actions align="right">
-          <q-btn
-            label="Sair"
-            color="negative"
-            v-close-popup
-            class="q-mr-lg" />
-          <q-btn
-            label="Salvar"
-            color="primary"
-            @click="confirmarTransferenciaTicket" />
-        </q-card-actions>
-      </q-card>
-    </q-dialog>
+    <q-card class="container-rounded-10 modal-container q-pa-lg">
 
-    <q-dialog v-model="modalTransferirTicket2"
-      @hide="modalTransferirTicket2 = false"
-      persistent>
-      <q-card class="q-pa-md"
-        style="width: 500px">
-        <q-card-section>
-          <div class="text-h6">Transferir atendimento entre usuários</div>
-          <div class="text-h8">Atenção, os usuários devem ter acesso as mesmas filas:</div>
-        </q-card-section>
-        <q-card-section>
-          <q-select square
-            outlined
-            v-model="usuarioSelecionado2"
-            :options="usuarios2"
-            emit-value
-            map-options
-            option-value="id"
-            option-label="name"
-            label="Usuário de Origem" />
-        </q-card-section>
-        <q-card-section>
-          <q-select square
-            outlined
-            v-model="usuarioSelecionado3"
-            :options="usuarios3"
-            emit-value
-            map-options
-            option-value="id"
-            option-label="name"
-            label="Usuário de Destino" />
-        </q-card-section>
-        <q-card-actions align="right">
-          <q-btn
-            label="Sair"
-            color="negative"
-            v-close-popup
-            class="q-mr-lg" />
-          <q-btn
-            label="Salvar"
-            color="primary"
-            @click="confirmarTransferenciaTicket2" />
-        </q-card-actions>
-      </q-card>
-    </q-dialog>
+      <q-card-actions align="right">
+        <q-btn
+          flat
+          color="negative"
+          icon="eva-close-outline"
+          v-close-popup
+        />
+      </q-card-actions>
 
-    <q-dialog v-model="modalTransferirTicket3"
-      @hide="modalTransferirTicket3 = false"
-      persistent>
-      <q-card class="q-pa-md container-rounded-10">
-        <q-card-section>
-          <div class="text-h6 font-family-main">Resolver todos os atendimentos pendentes</div>
-          <div class="text-h8">Atenção, essa é uma ação em massa e não poderá ser revertida.</div>
-        </q-card-section>
-        <q-card-actions align="right">
-          <q-btn
-            label="Sair"
-            color="negative"
-            v-close-popup
-            class="q-mr-lg btn-rounded-50" />
-          <q-btn
-            label="Resolver"
-            class="btn-rounded-50 generate-button"
-            icon="eva-save-outline"
-            @click="resolverTodosPendentes" />
-        </q-card-actions>
-      </q-card>
-    </q-dialog>
+      <q-card-section>
+        <div class="text-h6 text-center font-family-main">Fechar Tickets em Massa</div>
+      </q-card-section>
+      <div class="container-border container-rounded-10">
 
-    <q-dialog v-model="modalTransferirTicket4"
-      @hide="modalTransferirTicket4 = false"
+      <q-card-section class="row flex-gap-1 q-col-gutter-sm">
+        <div class="text-h6 font-family-main">
+          Atenção, essa é uma ação em massa e não poderá ser revertida.
+        </div>
+        <div class="flex-gap-1 full-width row q-col-gutter-sm">
+          <div class="full-width">
+          <DatePick dense rounded outlined label="Data Inicial criação ticket"
+            class="row col"
+            v-model="fecharTickets.dateStart" />
+          </div>
+          <div class="full-width">
+          <DatePick dense rounded outlined label="Data Final criação ticket"
+            class="row col"
+            v-model="fecharTickets.dateEnd" />
+          </div>
+          <div class="full-width">
+            <q-select
+              rounded
+              outlined
+			  dense
+              v-model="fecharTickets.status"
+              :options="optionsTickets"
+              option-value="value"
+              option-label="label"
+              emit-value
+              map-options
+              label="Status"
+            />
+          </div>
+          <div class="full-width"> 
+            <q-select
+              rounded
+			  outlined
+			  dense
+              label="Canal"
+              v-model="fecharTickets.whatsappId"
+              :options="listaWhats"
+              map-options
+              emit-value
+              option-value="id"
+              option-label="name"
+              clearable
+            >
+          </div>		  
+          <div class="full-width">
+        <q-checkbox
+          v-model="fecharTickets.isGroup"
+          label="Grupo"
+        />
+          </div>
+        </div>
+      </q-card-section>
+      </div>
+
+      <q-card-actions align="right">
+        <q-btn
+          label="Cancelar"
+          class="q-px-md q-mr-sm btn-rounded-50"
+          color="negative"
+          v-close-popup
+        />
+        <q-btn
+          label="Executar"
+          class="q-px-md btn-rounded-50 generate-button"
+          icon="eva-save-outline"
+          @click="handleFecharMassa"
+        />
+      </q-card-actions>
+    </q-card>
+  </q-dialog>
+
+
+    <q-dialog v-model="modarApagarMassa"
+      @hide="modarApagarMassa = false"
       persistent>
-      <q-card class="q-pa-md container-rounded-10"
-        style="width: 500px">
-        <q-card-section>
-          <div class="text-h6 font-family-main">Resolver todos os atendimentos abertos</div>
-          <div class="text-h8">Atenção, essa é uma ação em massa e não poderá ser revertida.</div>
-        </q-card-section>
-        <q-card-actions align="right">
-          <q-btn
-            label="Sair"
-            color="negative"
-            v-close-popup
-            class="q-mr-lg btn-rounded-50" />
-          <q-btn
-            label="Resolver"
-            class="btn-rounded-50 generate-button"
-            icon="eva-save-outline"
-            @click="resolverTodosAbertos" />
-        </q-card-actions>
-      </q-card>
-    </q-dialog>
+    <q-card class="container-rounded-10 modal-container q-pa-lg">
+
+      <q-card-actions align="right">
+        <q-btn
+          flat
+          color="negative"
+          icon="eva-close-outline"
+          v-close-popup
+        />
+      </q-card-actions>
+
+      <q-card-section>
+        <div class="text-h6 text-center font-family-main">Apagar Tickets em Massa</div>
+      </q-card-section>
+      <div class="container-border container-rounded-10">
+
+      <q-card-section class="row flex-gap-1 q-col-gutter-sm">
+        <div class="text-h6 font-family-main">
+          Atenção, essa é uma ação em massa e não poderá ser revertida.
+        </div>
+        <div class="flex-gap-1 full-width row q-col-gutter-sm">
+          <div class="full-width">
+          <DatePick dense rounded outlined label="Data Inicial criação ticket"
+            class="row col"
+            v-model="apagarTickets.dateStart" />
+          </div>
+          <div class="full-width">
+          <DatePick dense rounded outlined label="Data Final criação ticket"
+            class="row col"
+            v-model="apagarTickets.dateEnd" />
+          </div>
+          <div class="full-width">
+            <q-select
+              rounded
+              outlined
+			  dense
+              v-model="apagarTickets.status"
+              :options="optionsTicketsApagar"
+              option-value="value"
+              option-label="label"
+              emit-value
+              map-options
+              label="Status"
+            />
+          </div>
+          <div class="full-width"> 
+            <q-select
+              rounded
+			  outlined
+			  dense
+              label="Canal"
+              v-model="apagarTickets.whatsappId"
+              :options="listaWhats"
+              map-options
+              emit-value
+              option-value="id"
+              option-label="name"
+              clearable
+            >
+          </div>		  
+          <div class="full-width">
+        <q-checkbox
+          v-model="apagarTickets.isGroup"
+          label="Grupo"
+        />
+          </div>
+        </div>
+      </q-card-section>
+      </div>
+
+      <q-card-actions align="right">
+        <q-btn
+          label="Cancelar"
+          class="q-px-md q-mr-sm btn-rounded-50"
+          color="negative"
+          v-close-popup
+        />
+        <q-btn
+          label="Executar"
+          class="q-px-md btn-rounded-50 generate-button"
+          icon="eva-save-outline"
+          @click="handleApagarMassa"
+        />
+      </q-card-actions>
+    </q-card>
+  </q-dialog>
 
   </div>
 </template>
@@ -363,7 +384,8 @@ import ItemTicket from 'src/pages/atendimento/ItemTicket'
 import { ConsultarTicketsQueuesService } from 'src/service/estatisticas.js'
 import { ListarFilas } from 'src/service/filas'
 import { ListarUsuarios } from 'src/service/user'
-import { AtualizarTicket } from 'src/service/tickets'
+import { AtualizarTicket, FecharemMassaTickets, ApagaremMassaTickets  } from 'src/service/tickets'
+import { ListarWhatsapps } from 'src/service/sessoesWhatsapp'
 const UserQueues = localStorage.getItem('queues')
 import { groupBy } from 'lodash'
 const profile = localStorage.getItem('profile')
@@ -391,7 +413,38 @@ export default {
         dateEnd: format(new Date(), 'yyyy-MM-dd'),
         queuesIds: []
       },
+      fecharTickets: {
+        dateStart: format(sub(new Date(), { days: 30 }), 'yyyy-MM-dd'),
+        dateEnd: format(new Date(), 'yyyy-MM-dd'),
+		optionsTickets: [
+        { value: 'open', label: 'Aberto' },
+        { value: 'pending', label: 'Pendente' }
+      ],
+	  listaWhats: [],
+	  isGroup: false,
+      },
+      apagarTickets: {
+        dateStart: format(sub(new Date(), { days: 30 }), 'yyyy-MM-dd'),
+        dateEnd: format(new Date(), 'yyyy-MM-dd'),
+		optionsTickets: [
+        { value: 'open', label: 'Aberto' },
+        { value: 'pending', label: 'Pendente' },
+        { value: 'closed', label: 'Fechado' }
+      ],
+	  listaWhats: [],
+	  isGroup: false,
+      },
       tickets: [],
+      optionsTickets: [
+        { value: 'open', label: 'Aberto' },
+        { value: 'pending', label: 'Pendente' }
+      ],
+      optionsTicketsApagar: [
+        { value: 'open', label: 'Aberto' },
+        { value: 'pending', label: 'Pendente' },
+        { value: 'closed', label: 'Fechado' }
+      ],
+	  listaWhats: [],
       filas: [],
       usuarios: [],
       modalTransferirTicket: false,
@@ -400,8 +453,8 @@ export default {
       usuarios2: [],
       usuarios3: [],
       modalTransferirTicket2: false,
-      modalTransferirTicket3: false,
-      modalTransferirTicket4: false,
+      modaFecharMassa: false,
+      modarApagarMassa: false,
       usuarioSelecionado2: null,
       usuarioSelecionado3: null,
       sizes: { lg: 3, md: 3, sm: 2, xs: 1 }
@@ -458,6 +511,92 @@ export default {
     }
   },
   methods: {
+    async handleApagarMassa() {
+      try {
+        const data = {
+          status: this.apagarTickets.status,
+          startDate: this.apagarTickets.dateStart,
+          endDate: this.apagarTickets.dateEnd,
+          whatsappId: this.apagarTickets.whatsappId,
+          isGroup: this.apagarTickets.isGroup
+        };
+
+        const response = await ApagaremMassaTickets(data);
+
+        if (response.status === 200) {
+          this.$q.notify({
+            type: 'positive',
+            message: 'Tickets apagados com sucesso!'
+          });
+        setTimeout(() => {
+          window.location.reload()
+        }, 1000)
+        } else {
+          this.$q.notify({
+            type: 'negative',
+            message: 'Ocorreu um erro ao apagar os tickets.'
+          });
+        setTimeout(() => {
+          window.location.reload()
+        }, 1000)
+        }
+
+        this.modaFecharMassa = false;
+      } catch (error) {
+        this.$q.notify({
+          type: 'negative',
+          message: 'Ocorreu um erro ao apagar os tickets.'
+        });
+        setTimeout(() => {
+          window.location.reload()
+        }, 1000)
+      }
+    },
+    async handleFecharMassa() {
+      try {
+        const data = {
+          status: this.fecharTickets.status,
+          startDate: this.fecharTickets.dateStart,
+          endDate: this.fecharTickets.dateEnd,
+          whatsappId: this.fecharTickets.whatsappId,
+          isGroup: this.fecharTickets.isGroup
+        };
+
+        const response = await FecharemMassaTickets(data);
+
+        if (response.status === 200) {
+          this.$q.notify({
+            type: 'positive',
+            message: 'Tickets fechados com sucesso!'
+          });
+        setTimeout(() => {
+          window.location.reload()
+        }, 1000)
+        } else {
+          this.$q.notify({
+            type: 'negative',
+            message: 'Ocorreu um erro ao fechar os tickets.'
+          });
+        setTimeout(() => {
+          window.location.reload()
+        }, 1000)
+        }
+
+        this.modaFecharMassa = false;
+      } catch (error) {
+        this.$q.notify({
+          type: 'negative',
+          message: 'Ocorreu um erro ao fechar os tickets.'
+        });
+        setTimeout(() => {
+          window.location.reload()
+        }, 1000)
+      }
+    },
+    async listaWhatsapp() {
+      const { data } = await ListarWhatsapps();
+      this.listaWhats = data.filter(f => f.isActive)
+    },
     filterUsers (element, index, array) {
       const fila = this.filaSelecionada
       if (fila == null) return true
@@ -548,21 +687,11 @@ export default {
         isTransference: 1
       })
     },
-    async fecharTicketsPendentes () {
-      try {
-        this.modalTransferirTicket3 = true
-      } catch (error) {
-        console.error(error)
-        this.$notificarErro('Problema ao fechar atendimentos em massa', error)
-      }
+    async fecharTicketsEmMassa () {
+        this.modaFecharMassa = true
     },
-    async fecharTicketsAbertos () {
-      try {
-        this.modalTransferirTicket4 = true
-      } catch (error) {
-        console.error(error)
-        this.$notificarErro('Problema ao fechar atendimentos em massa', error)
-      }
+    async apagarTicketsMassa () {
+        this.modarApagarMassa = true
     },
     async resolverTodosPendentes() {
       try {
@@ -596,7 +725,7 @@ export default {
         console.error(error)
         this.$notificarErro('Problema ao fechar atendimentos em massa', error)
       }
-      this.modalTransferirTicket3 = false
+      this.modaFecharMassa = false
     },
     async resolverTodosAbertos() {
       try {
@@ -630,7 +759,7 @@ export default {
         console.error(error)
         this.$notificarErro('Problema ao fechar atendimentos em massa', error)
       }
-      this.modalTransferirTicket4 = false
+      this.modarApagarMassa = false
     },
     deleteTicket (ticketId) {
       const newTickets = [...this.tickets]
@@ -752,6 +881,7 @@ export default {
       this.filas = res.data
     })
     await this.consultarTickets()
+	this.listaWhatsapp()
     this.userProfile = localStorage.getItem('profile')
   },
   destroyed () {

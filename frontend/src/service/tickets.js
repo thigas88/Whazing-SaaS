@@ -101,3 +101,19 @@ export function EditarMensagem (mensagem) {
     data: mensagem
   })
 }
+
+export function FecharemMassaTickets (data) {
+  return request({
+    url: '/tickets/close-tickets',
+    method: 'post',
+    data
+  })
+}
+
+export function ApagaremMassaTickets (data) {
+  return request({
+    url: '/tickets/del-tickets',
+    method: 'post',
+    data
+  })
+}

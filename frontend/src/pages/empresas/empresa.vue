@@ -6,8 +6,6 @@
       :columns="columns"
       :loading="loading"
       row-key="id"
-      :pagination.sync="pagination"
-      :rows-per-page-options="[0]"
     >
       <template v-slot:top-left>
         <div>
@@ -162,16 +160,6 @@ export default {
       whatsappStatus: {},
       listaWhatsapp: [],
       filterWhatsapp: [],
-      pagination: {
-        rowsPerPage: 40,
-        rowsNumber: 0,
-        lastIndex: 0
-      },
-      params: {
-        pageNumber: 1,
-        searchParam: null,
-        hasMore: true
-      },
       filter: '',
       modalEmpresa: false,
       modalUsuario: false,

@@ -87,7 +87,7 @@
             <q-input
               hide-bottom-space
               :loading="loading"
-              :disable="cDisableActions || Boolean(mensagemRapidaMedia)"
+              :disable="cDisableActions"
               ref="inputEnvioMensagem"
               id="inputEnvioMensagem"
               type="textarea"

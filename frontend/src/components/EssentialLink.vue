@@ -158,6 +158,10 @@
               <q-item-section>Etiquetas</q-item-section>
           </q-item>
           <q-item clickable
+            @click=" () => !('protocolos' == cRouterName) ? $router.push({ name: 'protocolos' }) : ''">
+              <q-item-section>Protocolos</q-item-section>
+          </q-item>
+          <q-item clickable
             @click=" () => !('campanhas' == cRouterName) ? $router.push({ name: 'campanhas' }) : ''">
               <q-item-section>Campanha</q-item-section>
           </q-item>
@@ -191,6 +195,10 @@
           <q-item clickable
             @click=" () => !('etiquetas' == cRouterName) ? $router.push({ name: 'etiquetas' }) : ''">
               <q-item-section>Etiquetas</q-item-section>
+          </q-item>
+          <q-item clickable
+            @click=" () => !('protocolos' == cRouterName) ? $router.push({ name: 'protocolos' }) : ''">
+              <q-item-section>Protocolos</q-item-section>
           </q-item>
           <q-item clickable
             @click=" () => !('campanhas' == cRouterName) ? $router.push({ name: 'campanhas' }) : ''">

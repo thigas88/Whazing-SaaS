@@ -140,6 +140,14 @@
               </q-tooltip>
             </q-select>
           </q-card-section>
+          <q-card-section>
+        <q-checkbox
+		  v-if="(item.status == 'DISCONNECTED' || item.status == 'qrcode') && item.type == 'whatsapp'"
+          v-model="item.importmessages"
+          label="Importar mensagens ao LER QRCODE"
+		  @input="handleSaveWhatsApp(item)"
+        />
+          </q-card-section>
           <q-separator />
           <q-card-actions
             class="q-gutter-md q-pa-sm q-pt-none"
