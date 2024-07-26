@@ -162,6 +162,10 @@
               <q-item-section>Protocolos</q-item-section>
           </q-item>
           <q-item clickable
+            @click=" () => !('agendamentos' == cRouterName) ? $router.push({ name: 'agendamentos' }) : ''">
+              <q-item-section>Agendamentos</q-item-section>
+          </q-item>
+          <q-item clickable
             @click=" () => !('campanhas' == cRouterName) ? $router.push({ name: 'campanhas' }) : ''">
               <q-item-section>Campanha</q-item-section>
           </q-item>
@@ -199,6 +203,10 @@
           <q-item clickable
             @click=" () => !('protocolos' == cRouterName) ? $router.push({ name: 'protocolos' }) : ''">
               <q-item-section>Protocolos</q-item-section>
+          </q-item>
+          <q-item clickable
+            @click=" () => !('agendamentos' == cRouterName) ? $router.push({ name: 'agendamentos' }) : ''">
+              <q-item-section>Agendamentos</q-item-section>
           </q-item>
           <q-item clickable
             @click=" () => !('campanhas' == cRouterName) ? $router.push({ name: 'campanhas' }) : ''">

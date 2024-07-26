@@ -6,6 +6,7 @@
 - Menu Ajuda
 - Integração bancaria recebimento PIX, verificar docs
 - Lista de Protocolos
+- Lista de Agendamentos
 - Tela atendimento com varios filtros, separação por grupos
 - Mensagens rápidas com anexos
 - Importação mensagens celular

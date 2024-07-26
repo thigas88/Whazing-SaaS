@@ -117,3 +117,11 @@ export function ApagaremMassaTickets (data) {
     data
   })
 }
+
+export function ListarAgendamento(params) {
+  return request({
+    url: '/schedule',
+    method: 'get',
+    params
+  });
+}

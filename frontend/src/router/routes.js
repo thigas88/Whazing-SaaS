@@ -27,6 +27,7 @@ const routes = [
       { path: '/chat-interno', name: 'chat-interno', component: () => import('pages/chatInterno/index.vue') },
       { path: '/equipes', name: 'equipes', component: () => import('pages/equipes/Index.vue') },
       { path: '/protocolos', name: 'protocolos', component: () => import('pages/protocolos/Index.vue') },
+      { path: '/agendamentos', name: 'agendamentos', component: () => import('pages/agendamentos/Index.vue') },
       {
         path: '/chat-flow',
         component: () => import('pages/chatFlow/Index.vue'),
