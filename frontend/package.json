@@ -1,6 +1,6 @@
 {
-  "name": "Whazing",
-  "version": "2.1.1",
+  "name": "whazing-frontend",
+  "version": "2.2.0",
   "description": "Bot Multiatendimento, multicanais e multiempresas.",
   "productName": "Whazing",
   "author": "cleitonme <cleitonme@gmail.com>",
@@ -9,9 +9,10 @@
     "fix": "eslint --ext .js,.vue ./ --fix",
     "lint": "eslint --ext .js,.vue ./",
     "test": "echo \"No test specified\" && exit 0",
-    "start": "pm2 start server.js --name izing-frontend",
-    "stop": "pm2 stop server.js --name izing-frontend",
-    "build": "export NODE_OPTIONS=--openssl-legacy-provider && npx quasar build -P -m pwa"
+    "start": "pm2 start server.js --name whazing-frontend",
+    "stop": "pm2 stop server.js --name whazing-frontend",
+    "build": "export NODE_OPTIONS=--openssl-legacy-provider && npx quasar build -P -m pwa",
+    "dev": "export NODE_OPTIONS=--openssl-legacy-provider && npx quasar dev"
   },
   "dependencies": {
     "@quasar/cli": "^2.4.1",
@@ -76,8 +77,8 @@
     "last 5 Opera versions"
   ],
   "engines": {
-    "node": ">= 20.13.1",
-    "npm": ">= 10.5.2",
-    "yarn": ">= 1.21.1"
+    "node": ">=20.13.1",
+    "npm": ">=10.5.2",
+    "yarn": ">=1.21.1"
   }
 }

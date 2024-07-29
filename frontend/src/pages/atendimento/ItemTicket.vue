@@ -2,13 +2,12 @@
   <q-list separator
     style="max-width: 100%"
     class="q-px-sm q-py-none q-pt-sm">
-    <!-- :clickable="ticket.status !== 'pending' && (ticket.id !== $store.getters['ticketFocado'].id || $route.name !== 'chat')" -->
     <q-item clickable
       style="height: 95px; max-width: 100%;"
       @click="abrirChatContato(ticket)"
       :style="`border-left: 6px solid ${borderColor[ticket.status]}; border-radius: 10px`"
       id="item-ticket-houve"
-      class="ticketBorder q-px-sm"
+      class=" ticketBorder q-px-sm"
       :class="{
         'ticketBorderGrey': !$q.dark.isActive,
         'ticket-active-item': ticket.id === $store.getters['ticketFocado'].id,
@@ -145,33 +144,7 @@
             class="q-mr-md text-bold" />
         </q-item-label>
         </q-item-section>
-        <q-item-section avatar
-        class="q-px-none">
-        <q-btn flat
-          @click="espiarAtendimento(ticket)"
-          push
-          color="primary"
-          dense
-          round
-          v-if="enablespyticket === true && (ticket.status === 'pending' || buscaTicket)"
-          class="q-mr-md">
-          <q-avatar>
-            <q-icon size="20px"
-              name="mdi-eye-outline" />
-          </q-avatar>
-          <q-tooltip>
-            Espiar
-          </q-tooltip>
-        </q-btn>
-
-        <!-- <span class="absolute-bottom-right" v-if="ticket.unreadMessages">
-          <q-badge style="font-size: .8em; border-radius: 10px;" class="q-py-xs" dense text-color="white" color="green" :label="ticket.unreadMessages" />
-        </span> -->
-      </q-item-section>
     </q-item>
-    <!-- <q-separator color="grey-2"
-      inset="item" /> -->
-    <!-- <q-separator /> -->
   </q-list>
 </template>
 
@@ -191,9 +164,9 @@ export default {
       currentTicket: {},
       tagsDoTicket: [],
       walletsDoTicket: [],
+      // colorName: null,
       outlinedAccountCircle,
       recalcularHora: 1,
-      enablespyticket: false,
       statusAbreviado: {
         open: 'A',
         pending: 'P',
@@ -246,7 +219,13 @@ export default {
   async mounted() {
     this.tagsDoTicket = await this.obterInformacoes(this.ticket, 'tags')
     this.walletsDoTicket = await this.obterInformacoes(this.ticket, 'carteiras')
-    this.listarConfiguracoes()
+
+    this.$store.subscribe(async (mutation, state) => {
+      if (mutation.type === 'UPDATE_CONTACT' && mutation.payload.id === this.ticket.contactId) {
+        this.tagsDoTicket = await this.obterInformacoes(this.ticket, 'tags')
+        this.walletsDoTicket = await this.obterInformacoes(this.ticket, 'carteiras')
+      }
+    })
   },
   methods: {
     closeModal() {
@@ -304,7 +283,7 @@ export default {
       if (this.$q.screen.lt.md && ticket.status !== 'pending') {
         this.$root.$emit('infor-cabecalo-chat:acao-menu')
       }
-      if (!(ticket.status !== 'pending' && (ticket.id !== this.$store.getters.ticketFocado.id || this.$route.name !== 'chat'))) return
+      if (!((ticket.id !== this.$store.getters.ticketFocado.id || this.$route.name !== 'chat'))) return
       this.$store.commit('SET_HAS_MORE', true)
       this.$store.dispatch('AbrirChatMensagens', ticket)
     }

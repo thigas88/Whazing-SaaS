@@ -68,9 +68,9 @@
 </template>
 
 <script>
-import { ListarProtocolos } from 'src/service/protocolos';
-import { ListarUsuarios } from 'src/service/user';
-import { ObterContato } from 'src/service/contatos';
+import { ListarProtocolos } from 'src/service/protocolos'
+import { ListarUsuarios } from 'src/service/user'
+import { ObterContato } from 'src/service/contatos'
 
 export default {
   name: 'Protocolos',
@@ -103,89 +103,87 @@ export default {
   },
   methods: {
     async listarUsuarios() {
-      const data = await ListarUsuarios();
-      this.usuarios = data.data.users;
+      const data = await ListarUsuarios()
+      this.usuarios = data.data.users
     },
     async listarProtocolos() {
-      this.loading = true;
+      this.loading = true
       try {
-
         const response = await ListarProtocolos({
           searchParam: this.filter,
           pageNumber: this.params.pageNumber,
           tenantId: localStorage.getItem('tenantId')
-        });
+        })
 
         if (response.data && Array.isArray(response.data.protocols)) {
           this.protocolos = [
             ...this.protocolos,
             ...(await Promise.all(
               response.data.protocols.map(async (protocolo) => {
-                protocolo.contactName = await this.getContactName(protocolo.contactId);
-                return protocolo;
+                protocolo.contactName = await this.getContactName(protocolo.contactId)
+                return protocolo
               })
             ))
-          ];
-          this.pagination.rowsNumber = response.data.count || 0;
-          this.pagination.hasMore = response.data.hasMore;
+          ]
+          this.pagination.rowsNumber = response.data.count || 0
+          this.pagination.hasMore = response.data.hasMore
         } else {
-          console.error('Resposta da API não está no formato esperado:', response.data);
+          console.error('Resposta da API não está no formato esperado:', response.data)
         }
       } catch (error) {
-        console.error('Erro ao listar protocolos:', error);
+        console.error('Erro ao listar protocolos:', error)
       } finally {
-        this.loading = false;
+        this.loading = false
       }
     },
     async getContactName(contactId) {
       if (this.contatosCache[contactId]) {
-        return this.contatosCache[contactId].name;
+        return this.contatosCache[contactId].name
       }
       try {
-        const response = await ObterContato(contactId);
-        const contact = response.data;
-        this.contatosCache[contactId] = contact;
-        return contact.name;
+        const response = await ObterContato(contactId)
+        const contact = response.data
+        this.contatosCache[contactId] = contact
+        return contact.name
       } catch (error) {
-        console.error('Erro ao buscar contato:', error);
-        return 'Contato não encontrado';
+        console.error('Erro ao buscar contato:', error)
+        return 'Contato não encontrado'
       }
     },
     formatUser(userId) {
-      const user = this.usuarios.find(user => user.id === userId);
-      return user ? user.name : 'Usuário não encontrado';
+      const user = this.usuarios.find(user => user.id === userId)
+      return user ? user.name : 'Usuário não encontrado'
     },
     getTicketUrl(ticketId) {
-      const route = this.$router.resolve({ path: `/atendimento/${ticketId}` });
-      return route.href;
+      const route = this.$router.resolve({ path: `/atendimento/${ticketId}` })
+      return route.href
     },
     formatDate(dateString) {
-      const date = new Date(dateString);
-      date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
-      const day = date.getDate().toString().padStart(2, '0');
-      const month = (date.getMonth() + 1).toString().padStart(2, '0');
-      const year = date.getFullYear();
-      return `${day}-${month}-${year}`;
+      const date = new Date(dateString)
+      date.setMinutes(date.getMinutes() + date.getTimezoneOffset())
+      const day = date.getDate().toString().padStart(2, '0')
+      const month = (date.getMonth() + 1).toString().padStart(2, '0')
+      const year = date.getFullYear()
+      return `${day}-${month}-${year}`
     },
-  async filtrarProtocolos() {
-    this.params.pageNumber = 1;
-    this.params.hasMore = true; // Garantir que há mais dados a serem carregados
-    this.protocolos = []; // Limpar protocolos atuais para aplicar o novo filtro
-    await this.listarProtocolos();
-  },
+    async filtrarProtocolos() {
+      this.params.pageNumber = 1
+      this.params.hasMore = true // Garantir que há mais dados a serem carregados
+      this.protocolos = [] // Limpar protocolos atuais para aplicar o novo filtro
+      await this.listarProtocolos()
+    },
     onScroll({ to, ref, ...all }) {
-
       if (!this.loading && this.params.hasMore && to >= (this.protocolos.length - 10)) {
-        this.loading = true;
-        this.params.pageNumber++;
-        this.listarProtocolos();
+        this.loading = true
+        this.params.pageNumber++
+        this.listarProtocolos()
       }
     }
   },
   async mounted() {
-    await this.listarProtocolos();
-    await this.listarUsuarios();
-    this.userProfile = localStorage.getItem('profile');
+    await this.listarProtocolos()
+    await this.listarUsuarios()
+    this.userProfile = localStorage.getItem('profile')
   }
 }
 </script>

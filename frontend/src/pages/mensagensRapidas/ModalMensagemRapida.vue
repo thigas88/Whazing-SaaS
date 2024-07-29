@@ -128,7 +128,7 @@ export default {
       variaveis: [
         { label: 'Nome', value: '{{name}}' },
         { label: 'Saudação', value: '{{greeting}}' },
-        { label: 'Protocolo', value: '{{protocol}}' },
+        { label: 'Protocolo', value: '{{protocol}}' }
       ]
     }
   },

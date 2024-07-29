@@ -70,6 +70,36 @@
                       Enviar documentos, vídeo, aúdio e outros arquivos.
                     </q-tooltip>
                   </q-btn>
+                  <q-btn flat
+                    icon="mdi-timer-outline"
+                    class="generate-button btn-rounded q-mx-xs"
+                    :class="{'generate-button-dark' : $q.dark.isActive}"
+                    :color="$q.dark.isActive ? 'white' : ''"
+                    @click="addDelay">
+                    <q-tooltip content-class="text-bold">
+                      Adicionar Delay
+                    </q-tooltip>
+                  </q-btn>
+                  <q-btn flat
+                    icon="mdi-tag-outline"
+                    class="generate-button btn-rounded q-mx-xs"
+                    :class="{'generate-button-dark' : $q.dark.isActive}"
+                    :color="$q.dark.isActive ? 'white' : ''"
+                    @click="addTags">
+                    <q-tooltip content-class="text-bold">
+                      Adicionar Tag
+                    </q-tooltip>
+                  </q-btn>
+                  <q-btn flat
+                    icon="mdi-webhook"
+                    class="generate-button btn-rounded q-mx-xs"
+                    :class="{'generate-button-dark' : $q.dark.isActive}"
+                    :color="$q.dark.isActive ? 'white' : ''"
+                    @click="addWebhook">
+                    <q-tooltip content-class="text-bold">
+                      Adicionar Webhook (GET)
+                    </q-tooltip>
+                  </q-btn>
                 </div>
                 <div class="row bg-grey-2 q-pa-sm q-my-md justify-center scroll"
                   style="height: calc(100vh - 495px)">
@@ -269,6 +299,17 @@
                               emit-value
                               clearable
                               @input="condition.nextStepId = null; condition.queueId = null; condition.closeTicket = null" />
+                            <q-input v-if="condition.action === 3"
+                              v-model="condition.closeTicket"
+                              label="Mensagem de encerramento"
+                              type="textarea"
+                              autogrow
+                              dense
+                              outlined
+                              input-style="min-height: 6vh; max-height: 9vh;"
+                              debounce="700"
+                              @input="condition.nextStepId = null; condition.userIdDestination = null; condition.queueId = null"
+                            />
                           </div>
                         </div>
                       </q-card-section>
@@ -647,11 +688,17 @@ import { uid } from 'quasar'
 import MessageField from './messageField'
 // import MessageOptionsField from './messageOptionsField.vue'
 import MediaField from './mediaField.vue'
+import DelayField from './delayField.vue'
+import TagField from './tagField.vue'
+import WebhookField from './webhookField.vue'
 import { VEmojiPicker } from 'v-emoji-picker'
 export default {
   components: {
     MessageField,
     VEmojiPicker,
+    DelayField,
+    TagField,
+    WebhookField,
     // MessageOptionsField,
     MediaField
   },
@@ -678,29 +725,30 @@ export default {
       optionsAcao: [
         { value: 0, label: 'Etapa' },
         { value: 1, label: 'Fila' },
-        { value: 2, label: 'Usuário' }
+        { value: 2, label: 'Usuário' },
+        { value: 3, label: 'Encerrar' }
       ],
       optionsSe: [
         { label: 'Qualquer resposta', value: 'US' },
         { label: 'Respostas', value: 'R' }
       ],
-      // node 或 line
+
       type: 'node',
       node: {},
       line: {},
       data: {},
       stateList: [{
         state: 'success',
-        label: '成功'
+        label: 'sucesso'
       }, {
         state: 'warning',
-        label: '警告'
+        label: 'avisor'
       }, {
         state: 'error',
-        label: '错误'
+        label: 'erro'
       }, {
         state: 'running',
-        label: '运行中'
+        label: 'Rodando'
       }]
     }
   },
@@ -726,6 +774,27 @@ export default {
           name: '',
           caption: ''
         },
+        id: this.gerarUID()
+      })
+    },
+    addDelay () {
+      this.node.interactions.push({
+        type: 'DelayField',
+        data: { time: null },
+        id: this.gerarUID()
+      })
+    },
+    addTags () {
+      this.node.interactions.push({
+        type: 'TagField',
+        data: { tag: null },
+        id: this.gerarUID()
+      })
+    },
+    addWebhook () {
+      this.node.interactions.push({
+        type: 'WebhookField',
+        data: { webhook: '' },
         id: this.gerarUID()
       })
     },

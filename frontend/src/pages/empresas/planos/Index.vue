@@ -45,8 +45,7 @@
               </template>
             </q-table>
             <ModalPlano :modalPlano.sync="modalPlano" :planoEdicao.sync="planoEdicao" @modal-plano:criada="planoCriada"
-              @modal-plano:editada="planoEditada" />
-    </template>
+            @modal-plano:editada="planoEditada" />
   </div>
 </template>
 

@@ -462,7 +462,7 @@ export default {
   },
   computed: {
     canAccessPage() {
-      return this.ContactAdmin !== 'enabled' || this.userProfile === 'admin';
+      return this.ContactAdmin !== 'enabled' || this.userProfile === 'admin'
     },
     ...mapGetters(['whatsapps'])
   },
@@ -474,7 +474,7 @@ export default {
       filas: [],
       usuariosTransferencia: [],
       contacts: [],
-	  userProfile: 'user',
+      userProfile: 'user',
       ContactAdmin: null,
       ticketFocado: '',
       modalImportarContatos: false,
@@ -562,7 +562,7 @@ export default {
   },
   methods: {
     redirectHome() {
-      this.$router.push('/');
+      this.$router.push('/')
     },
     async listarConfiguracoes () {
       const { data } = await ListarConfiguracoes()

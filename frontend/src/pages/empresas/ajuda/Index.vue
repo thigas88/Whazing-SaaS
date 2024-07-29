@@ -22,9 +22,7 @@
           label="Adicionar"
           @click="ajudaEdicao = {}; modalAjuda = true" />
         </div>
-
       </template>
-
               <template v-slot:body-cell-acoes="props">
                 <q-td class="text-center">
                   <q-btn flat round icon="eva-edit-outline" @click="editarAjuda(props.row)" />
@@ -33,8 +31,7 @@
               </template>
             </q-table>
             <ModalAjuda :modalAjuda.sync="modalAjuda" :ajudaEdicao.sync="ajudaEdicao" @modal-ajuda:criada="ajudaCriada"
-              @modal-ajuda:editada="ajudaEditada" />
-    </template>
+            @modal-ajuda:editada="ajudaEditada" />
   </div>
 </template>
 

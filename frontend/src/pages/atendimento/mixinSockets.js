@@ -3,8 +3,6 @@ import Router from 'src/router/index'
 import checkTicketFilter from 'src/utils/checkTicketFilter'
 import { socketIO } from 'src/utils/socket'
 import { ConsultarTickets } from 'src/service/tickets'
-import { orderBy } from 'lodash'
-import { parseISO } from 'date-fns'
 
 const socket = socketIO()
 
@@ -178,14 +176,6 @@ export default {
             // Faz verificação para se certificar que notificação pertence a fila do usuário
             var pass_noti = false
             verify.data.tickets.forEach((element) => { pass_noti = (element.id == data.payload.id ? true : pass_noti) })
-            // Exibe Notificação
-            if (pass_noti) {
-              const message = new self.Notification('Novo cliente pendente', {
-                body: 'Cliente: ' + data.payload.contact.name,
-                tag: 'simple-push-demo-notification'
-              })
-              // console.log(message)
-            }
           }
         })
 

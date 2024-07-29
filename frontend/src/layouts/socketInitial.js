@@ -91,6 +91,13 @@ export default {
         }
       })
 
+      this.socket.on(`${usuario.tenantId}:contactList`, data => {
+        if (data.type === 'contact:update') {
+          console.log('socket ON: CONTACT:UPDATE')
+          this.$store.commit('UPDATE_CONTACT', data.payload)
+        }
+      })
+
       this.socket.on(`${usuario.tenantId}:whatsappSession`, data => {
         if (data.action === 'update') {
           this.$store.commit('UPDATE_SESSION', data.session)

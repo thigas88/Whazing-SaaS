@@ -375,7 +375,6 @@
         </div>
 
       </q-card-section>
-    </div>
 
       <q-card-section class="q-mb-md">
         <div class="float-right q-mb-md">

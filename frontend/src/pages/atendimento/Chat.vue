@@ -15,12 +15,15 @@
           <div slot="no-more">Nada mais a carregar :)</div>
         </infinite-loading>
       </transition>
-      <MensagemChat :replyingMessage.sync="replyingMessage"
-        :mensagens="cMessages"
-        v-if="cMessages.length && ticketFocado.id"
-        @mensagem-chat:encaminhar-mensagem="abrirModalEncaminharMensagem"
-        :ativarMultiEncaminhamento.sync="ativarMultiEncaminhamento"
-        :mensagensParaEncaminhar.sync="mensagensParaEncaminhar" />
+
+<MensagemChat
+  :replyingMessage.sync="replyingMessage"
+  :mensagens="cMessages"
+  v-if="cMessages.length && ticketFocado.id && !(ticketFocado.status === 'pending' && userProfile !== 'admin' && !spyticket)"
+  @mensagem-chat:encaminhar-mensagem="abrirModalEncaminharMensagem"
+  :ativarMultiEncaminhamento.sync="ativarMultiEncaminhamento"
+  :mensagensParaEncaminhar.sync="mensagensParaEncaminhar" />
+
       <div id="inicioListaMensagensChat"></div>
     </q-scroll-area>
     <div
@@ -31,23 +34,15 @@
       }"
       v-if="!ticketFocado.id"
     >
-      <q-icon
-        style="margin-left: 30vw"
-        size="6em"
-        color="grey-6"
-        name="mdi-emoticon-wink-outline"
-        class="row col text-center"
-        :class="{
-            'row col text-center q-mr-lg': !$q.screen.xs,
-            'full-width text-center center-block': $q.screen.xs
-          }">
-      </q-icon>
-      <h1 class="text-grey-6 row col justify-center"
-        :class="{
-            'full-width': $q.screen.xs
-          }">
-        Selecione um ticket!
-      </h1>
+    <div
+  style="margin-left: 30vw; display: flex; justify-content: center; align-items: center;">
+  <img src="/logo.png" style="width: 400px; height: 160px;">
+</div>
+<h1 class="text-grey-6 row col justify-center"
+  :class="{
+      'full-width': $q.screen.xs
+    }">
+</h1>
     </div>
     <div v-if="cMessages.length"
       class="relative-position">
@@ -58,6 +53,19 @@
           <q-btn class="vac-icon-scroll" color="white" text-color="black" icon="mdi-arrow-down" round push ripple dense @click="scrollToBottom" />
         </div>
       </transition>
+
+<div v-if="ticketFocado.status === 'pending'"
+  class="bg-transparent fast-messages-list flex flex-center"
+>
+  <q-btn
+   class="generate-button btn-rounded-50 q-ml-md"
+   :class="{'text-white': $q.dark.isActive,'q-ml-none q-mt-md q-mr-md': $q.screen.width < 500}"
+    icon="mdi-send-circle"
+    label="Iniciar o atendimento"
+    @click="iniciarAtendimento(ticketFocado)"
+  />
+</div>
+
     </div>
 
     <q-footer class="bg-white">
@@ -234,6 +242,7 @@ export default {
   },
   data () {
     return {
+      userProfile: 'user',
       scrollIcon: false,
       loading: false,
       exibirContato: false,
@@ -278,7 +287,7 @@ export default {
   },
   methods: {
     onClickOpenAgendamentoMensagem() {
-      const dialog = this.$q.dialog({
+      this.$q.dialog({
         component: () => import('./AgendamentoMensagem.vue'),
         parent: this,
         mensagensRapidas: this.mensagensRapidas,
@@ -368,6 +377,7 @@ export default {
   },
   mounted () {
     this.socketMessagesList()
+    this.userProfile = localStorage.getItem('profile')
   },
   destroyed () {
     this.$root.$off('scrollToBottomMessageChat', this.scrollToBottom)

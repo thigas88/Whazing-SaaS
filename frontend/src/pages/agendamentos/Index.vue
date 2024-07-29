@@ -85,8 +85,8 @@
 </template>
 
 <script>
-import { ListarAgendamento, DeletarMensagem } from 'src/service/tickets';
-import { ListarUsuarios } from 'src/service/user';
+import { ListarAgendamento, DeletarMensagem } from 'src/service/tickets'
+import { ListarUsuarios } from 'src/service/user'
 
 export default {
   name: 'Protocolos',
@@ -128,14 +128,14 @@ export default {
           cancel: {
             label: 'Não',
             color: 'primary',
-            push: true,
+            push: true
           },
           ok: {
             label: 'Sim',
             color: 'negative',
-            push: true,
+            push: true
           },
-          persistent: true,
+          persistent: true
         })
         .onOk(() => {
           this.loading = true
@@ -143,7 +143,7 @@ export default {
             .then((res) => {
               this.loading = false
               mensagem.isDeleted = true
-              window.location.reload();
+              window.location.reload()
             })
             .catch((error) => {
               this.loading = false
@@ -154,78 +154,78 @@ export default {
         .onCancel(() => {})
     },
     async listarUsuarios() {
-      const data = await ListarUsuarios();
-      this.usuarios = data.data.users;
+      const data = await ListarUsuarios()
+      this.usuarios = data.data.users
     },
     async listarAgendamentos() {
-      this.loading = true;
+      this.loading = true
       try {
         const response = await ListarAgendamento({
           startDate: this.params.startDate,
           endDate: this.params.endDate,
           pageNumber: this.params.pageNumber,
           tenantId: localStorage.getItem('tenantId')
-        });
+        })
 
         if (response.data && Array.isArray(response.data.messages)) {
           this.agendamentos = [
             ...this.agendamentos,
             ...(await Promise.all(
               response.data.messages.map(async (protocolo) => {
-                return protocolo;
+                return protocolo
               })
             ))
-          ];
-          this.pagination.rowsNumber = response.data.count || 0;
-          this.pagination.hasMore = response.data.hasMore;
+          ]
+          this.pagination.rowsNumber = response.data.count || 0
+          this.pagination.hasMore = response.data.hasMore
         } else {
-          console.error('Resposta da API não está no formato esperado:', response.data);
+          console.error('Resposta da API não está no formato esperado:', response.data)
         }
       } catch (error) {
-        console.error('Erro ao listar agendamentos:', error);
+        console.error('Erro ao listar agendamentos:', error)
       } finally {
-        this.loading = false;
+        this.loading = false
       }
     },
     formatUser(userId) {
-      const user = this.usuarios.find(user => user.id === userId);
-      return user ? user.name : 'Usuário não encontrado';
+      const user = this.usuarios.find(user => user.id === userId)
+      return user ? user.name : 'Usuário não encontrado'
     },
     getTicketUrl(ticketId) {
-      const route = this.$router.resolve({ path: `/atendimento/${ticketId}` });
-      return route.href;
+      const route = this.$router.resolve({ path: `/atendimento/${ticketId}` })
+      return route.href
     },
     formatDate(dateString) {
-      const date = new Date(dateString);
-      date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
-      const day = date.getDate().toString().padStart(2, '0');
-      const month = (date.getMonth() + 1).toString().padStart(2, '0');
-      const year = date.getFullYear();
-      return `${day}-${month}-${year}`;
+      const date = new Date(dateString)
+      date.setMinutes(date.getMinutes() + date.getTimezoneOffset())
+      const day = date.getDate().toString().padStart(2, '0')
+      const month = (date.getMonth() + 1).toString().padStart(2, '0')
+      const year = date.getFullYear()
+      return `${day}-${month}-${year}`
     },
     async filtrarProtocolos() {
-      this.params.pageNumber = 1;
-      this.params.hasMore = true; // Garantir que há mais dados a serem carregados
-      this.agendamentos = []; // Limpar agendamentos atuais para aplicar o novo filtro
-      await this.listarAgendamentos();
+      this.params.pageNumber = 1
+      this.params.hasMore = true // Garantir que há mais dados a serem carregados
+      this.agendamentos = [] // Limpar agendamentos atuais para aplicar o novo filtro
+      await this.listarAgendamentos()
     },
     onDateChange() {
       if (this.params.startDate && this.params.endDate) {
-        this.filtrarProtocolos();
+        this.filtrarProtocolos()
       }
     },
     onScroll({ to, ref, ...all }) {
       if (!this.loading && this.params.hasMore && to >= (this.agendamentos.length - 10)) {
-        this.loading = true;
-        this.params.pageNumber++;
-        this.listarAgendamentos();
+        this.loading = true
+        this.params.pageNumber++
+        this.listarAgendamentos()
       }
     }
   },
   async mounted() {
-    await this.listarAgendamentos();
-    await this.listarUsuarios();
-    this.userProfile = localStorage.getItem('profile');
+    await this.listarAgendamentos()
+    await this.listarUsuarios()
+    this.userProfile = localStorage.getItem('profile')
   }
 }
 </script>

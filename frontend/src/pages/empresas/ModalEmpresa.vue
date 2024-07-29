@@ -35,7 +35,7 @@
           </div>
           <div class="full-width">
           <q-datetime-picker
-			rounded
+            rounded
             outlined
             label="Data/Hora Vencimento"
             mode="datetime"
@@ -58,7 +58,6 @@
           </div>
           </div>
         </div>
-      </q-card-section>
       <q-card-section class="q-col-gutter-sm" v-if="!isEdit">
         <div class="text-h6">Cadastrar Usuario Responsável</div>
         <div class="row q-col-gutter-sm">

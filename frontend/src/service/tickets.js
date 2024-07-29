@@ -123,5 +123,5 @@ export function ListarAgendamento(params) {
     url: '/schedule',
     method: 'get',
     params
-  });
+  })
 }

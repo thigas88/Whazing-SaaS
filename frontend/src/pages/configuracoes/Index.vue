@@ -31,7 +31,7 @@
             unchecked-icon="clear" @input="atualizarConfiguracao('NotViewTicketsChatBot')" />
         </q-item-section>
       </q-item>
-	  
+
       <q-item class="config-item" tag="label" v-ripple>
         <q-item-section>
           <q-item-label>Habilitar guia de atendimento de Chatbots</q-item-label>
@@ -52,7 +52,7 @@
         />
         </q-item-section>
       </q-item>
-	  
+
       <q-item tag="label" v-ripple>
         <q-item-section>
           <q-item-label>Somente administradores podem acessar os lista de contatos</q-item-label>
@@ -182,7 +182,7 @@
       <q-item tag="label" v-ripple>
         <q-item-section>
           <q-item-label>Usuarios podem espiar ticket</q-item-label>
-          <q-item-label caption>Desativando essa opção somente administradores podem espiar os tickets</q-item-label>
+          <q-item-label caption>Desativando essa opção somente administradores podem ver mensagens antes de iniciar atendimento</q-item-label>
         </q-item-section>
         <q-item-section avatar>
           <q-toggle v-model="spyticket" false-value="disabled" true-value="enabled" checked-icon="check"
@@ -264,7 +264,7 @@
       </div>
 
     </q-list>
-	
+
 <q-separator spaced />
   </div>
 </template>
@@ -288,7 +288,7 @@ export default {
       listaChatFlow: [],
       NotViewAssignedTickets: null,
       NotViewTicketsChatBot: null,
-	  ContactAdmin: null,
+      ContactAdmin: null,
       DirectTicketsToWallets: null,
       botTicketActive: null,
       ignoreGroupMsg: null,

@@ -5,5 +5,5 @@ export function ListarProtocolos(params) {
     url: '/protocol',
     method: 'get',
     params
-  });
+  })
 }

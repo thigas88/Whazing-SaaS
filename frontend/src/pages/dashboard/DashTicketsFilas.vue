@@ -45,7 +45,7 @@
             Apagar tickets em Massa
           </q-tooltip>
         </q-btn>
-		
+
       </div>
     </div>
 
@@ -228,7 +228,7 @@
             <q-select
               rounded
               outlined
-			  dense
+              dense
               v-model="fecharTickets.status"
               :options="optionsTickets"
               option-value="value"
@@ -238,11 +238,11 @@
               label="Status"
             />
           </div>
-          <div class="full-width"> 
+          <div class="full-width">
             <q-select
               rounded
-			  outlined
-			  dense
+              outlined
+              dense
               label="Canal"
               v-model="fecharTickets.whatsappId"
               :options="listaWhats"
@@ -252,7 +252,7 @@
               option-label="name"
               clearable
             >
-          </div>		  
+          </div>
           <div class="full-width">
         <q-checkbox
           v-model="fecharTickets.isGroup"
@@ -279,7 +279,6 @@
       </q-card-actions>
     </q-card>
   </q-dialog>
-
 
     <q-dialog v-model="modarApagarMassa"
       @hide="modarApagarMassa = false"
@@ -319,7 +318,7 @@
             <q-select
               rounded
               outlined
-			  dense
+              dense
               v-model="apagarTickets.status"
               :options="optionsTicketsApagar"
               option-value="value"
@@ -329,11 +328,11 @@
               label="Status"
             />
           </div>
-          <div class="full-width"> 
+          <div class="full-width">
             <q-select
               rounded
-			  outlined
-			  dense
+              outlined
+              dense
               label="Canal"
               v-model="apagarTickets.whatsappId"
               :options="listaWhats"
@@ -343,7 +342,7 @@
               option-label="name"
               clearable
             >
-          </div>		  
+          </div>
           <div class="full-width">
         <q-checkbox
           v-model="apagarTickets.isGroup"
@@ -384,7 +383,7 @@ import ItemTicket from 'src/pages/atendimento/ItemTicket'
 import { ConsultarTicketsQueuesService } from 'src/service/estatisticas.js'
 import { ListarFilas } from 'src/service/filas'
 import { ListarUsuarios } from 'src/service/user'
-import { AtualizarTicket, FecharemMassaTickets, ApagaremMassaTickets  } from 'src/service/tickets'
+import { AtualizarTicket, FecharemMassaTickets, ApagaremMassaTickets } from 'src/service/tickets'
 import { ListarWhatsapps } from 'src/service/sessoesWhatsapp'
 const UserQueues = localStorage.getItem('queues')
 import { groupBy } from 'lodash'
@@ -416,23 +415,23 @@ export default {
       fecharTickets: {
         dateStart: format(sub(new Date(), { days: 30 }), 'yyyy-MM-dd'),
         dateEnd: format(new Date(), 'yyyy-MM-dd'),
-		optionsTickets: [
-        { value: 'open', label: 'Aberto' },
-        { value: 'pending', label: 'Pendente' }
-      ],
-	  listaWhats: [],
-	  isGroup: false,
+        optionsTickets: [
+          { value: 'open', label: 'Aberto' },
+          { value: 'pending', label: 'Pendente' }
+        ],
+        listaWhats: [],
+        isGroup: false
       },
       apagarTickets: {
         dateStart: format(sub(new Date(), { days: 30 }), 'yyyy-MM-dd'),
         dateEnd: format(new Date(), 'yyyy-MM-dd'),
-		optionsTickets: [
-        { value: 'open', label: 'Aberto' },
-        { value: 'pending', label: 'Pendente' },
-        { value: 'closed', label: 'Fechado' }
-      ],
-	  listaWhats: [],
-	  isGroup: false,
+        optionsTickets: [
+          { value: 'open', label: 'Aberto' },
+          { value: 'pending', label: 'Pendente' },
+          { value: 'closed', label: 'Fechado' }
+        ],
+        listaWhats: [],
+        isGroup: false
       },
       tickets: [],
       optionsTickets: [
@@ -444,7 +443,7 @@ export default {
         { value: 'pending', label: 'Pendente' },
         { value: 'closed', label: 'Fechado' }
       ],
-	  listaWhats: [],
+      listaWhats: [],
       filas: [],
       usuarios: [],
       modalTransferirTicket: false,
@@ -519,34 +518,34 @@ export default {
           endDate: this.apagarTickets.dateEnd,
           whatsappId: this.apagarTickets.whatsappId,
           isGroup: this.apagarTickets.isGroup
-        };
+        }
 
-        const response = await ApagaremMassaTickets(data);
+        const response = await ApagaremMassaTickets(data)
 
         if (response.status === 200) {
           this.$q.notify({
             type: 'positive',
             message: 'Tickets apagados com sucesso!'
-          });
-        setTimeout(() => {
-          window.location.reload()
-        }, 1000)
+          })
+          setTimeout(() => {
+            window.location.reload()
+          }, 1000)
         } else {
           this.$q.notify({
             type: 'negative',
             message: 'Ocorreu um erro ao apagar os tickets.'
-          });
-        setTimeout(() => {
-          window.location.reload()
-        }, 1000)
+          })
+          setTimeout(() => {
+            window.location.reload()
+          }, 1000)
         }
 
-        this.modaFecharMassa = false;
+        this.modaFecharMassa = false
       } catch (error) {
         this.$q.notify({
           type: 'negative',
           message: 'Ocorreu um erro ao apagar os tickets.'
-        });
+        })
         setTimeout(() => {
           window.location.reload()
         }, 1000)
@@ -560,41 +559,41 @@ export default {
           endDate: this.fecharTickets.dateEnd,
           whatsappId: this.fecharTickets.whatsappId,
           isGroup: this.fecharTickets.isGroup
-        };
+        }
 
-        const response = await FecharemMassaTickets(data);
+        const response = await FecharemMassaTickets(data)
 
         if (response.status === 200) {
           this.$q.notify({
             type: 'positive',
             message: 'Tickets fechados com sucesso!'
-          });
-        setTimeout(() => {
-          window.location.reload()
-        }, 1000)
+          })
+          setTimeout(() => {
+            window.location.reload()
+          }, 1000)
         } else {
           this.$q.notify({
             type: 'negative',
             message: 'Ocorreu um erro ao fechar os tickets.'
-          });
-        setTimeout(() => {
-          window.location.reload()
-        }, 1000)
+          })
+          setTimeout(() => {
+            window.location.reload()
+          }, 1000)
         }
 
-        this.modaFecharMassa = false;
+        this.modaFecharMassa = false
       } catch (error) {
         this.$q.notify({
           type: 'negative',
           message: 'Ocorreu um erro ao fechar os tickets.'
-        });
+        })
         setTimeout(() => {
           window.location.reload()
         }, 1000)
       }
     },
     async listaWhatsapp() {
-      const { data } = await ListarWhatsapps();
+      const { data } = await ListarWhatsapps()
       this.listaWhats = data.filter(f => f.isActive)
     },
     filterUsers (element, index, array) {
@@ -688,10 +687,10 @@ export default {
       })
     },
     async fecharTicketsEmMassa () {
-        this.modaFecharMassa = true
+      this.modaFecharMassa = true
     },
     async apagarTicketsMassa () {
-        this.modarApagarMassa = true
+      this.modarApagarMassa = true
     },
     async resolverTodosPendentes() {
       try {
@@ -881,7 +880,7 @@ export default {
       this.filas = res.data
     })
     await this.consultarTickets()
-	this.listaWhatsapp()
+    this.listaWhatsapp()
     this.userProfile = localStorage.getItem('profile')
   },
   destroyed () {

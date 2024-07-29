@@ -74,7 +74,6 @@ export function UpdateOpenIAWhatsapp(whatsAppId, data) {
   })
 }
 
-
 // api.put(`/whatsapp/${whatsAppId}`, {
 //   name: values.name,
 //   isDefault: values.isDefault,

@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <div class="bg-transparent fast-messages-list" v-if="cMensagensRapidas.length > 0">
+    <div class="bg-transparent fast-messages-list" v-if="cMensagensRapidas.length > 0 && ticketFocado.status === 'open'">
         <q-badge class="text-white item-fast-messages-list q-pa-sm" v-for="(resposta, index) in cMensagensRapidas" :key="resposta.key" clickable v-close-popup @click="mensagemRapidaSelecionada(resposta)"
         :class="getBadgeClass(index)">
           <q-item-label class="text-bold">
@@ -241,7 +241,6 @@ import RecordingTimer from './RecordingTimer'
 import MicRecorder from 'mic-recorder-to-mp3'
 const Mp3Recorder = new MicRecorder({ bitRate: 128 })
 import { add, format } from 'date-fns'
-import { defineComponent } from 'vue'
 import { ListarConfiguracoes } from 'src/service/configuracoes'
 
 export default {
