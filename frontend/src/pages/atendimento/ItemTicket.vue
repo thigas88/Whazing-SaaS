@@ -18,7 +18,7 @@
         <q-btn flat
           @click="iniciarAtendimento(ticket)"
           push
-          color="primary"
+          color="green"
           dense
           round
           v-if="ticket.status === 'pending' || (buscaTicket && ticket.status === 'pending')">
@@ -69,7 +69,7 @@
               style="font-size: .7em;"
               transparent
               square
-              text-color="grey-10"
+              text-color="green-5"
               color="secondary"
               :label="dataInWords(ticket.lastMessageAt, ticket.updatedAt)"
               :key="recalcularHora" />

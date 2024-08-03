@@ -5,7 +5,7 @@
         <q-badge class="text-white item-fast-messages-list q-pa-sm" v-for="(resposta, index) in cMensagensRapidas" :key="resposta.key" clickable v-close-popup @click="mensagemRapidaSelecionada(resposta)"
         :class="getBadgeClass(index)">
           <q-item-label class="text-bold">
-                  /{{ resposta.key }}
+                  {{ resposta.key }}
           </q-item-label>
           <q-tooltip content-class="bg-padrao text-grey-9 text-bold" anchor="top middle" self="bottom middle">
             {{ resposta.message }}
@@ -28,8 +28,8 @@
       <div class="q-py-md row bg-white justify-start items-center text-grey-9 relative-position">
       <template v-if="!isRecordingAudio">
 
-            <q-btn v-if="$q.screen.width > 500" flat dense icon="mdi-emoticon-happy-outline" :disable="cDisableActions" class="btn-rounded q-mx-xs" :color="$q.dark.isActive ? 'white' : ''" :class="{
-                  'text-white bg-black': $q.dark.isActive,
+            <q-btn v-if="$q.screen.width > 500" flat dense icon="mdi-emoticon-happy-outline" :disable="cDisableActions" class="btn-rounded q-mx-xs" :color="$q.dark.isActive ? 'green' : ''" :class="{
+                  'text-green bg-black': $q.dark.isActive,
                   '': !$q.dark.isActive
                   }">
               <q-tooltip content-class="text-bold"> Emoji </q-tooltip>
@@ -39,7 +39,7 @@
             </q-btn>
 
             <q-btn flat dense round icon="eva-plus-outline" :class="{
-                  'text-white bg-black': $q.dark.isActive,
+                  'text-green bg-black': $q.dark.isActive,
                   'tab-item': !$q.dark.isActive
                   }" v-if="$q.screen.width > 500">
               <q-menu>
@@ -51,7 +51,7 @@
                         icon="mdi-paperclip"
                         :disable="cDisableActions || desabilitarInput"
                         class=" btn-rounded full-width"
-                        :color="$q.dark.isActive ? 'white' : ''"
+                        :color="$q.dark.isActive ? 'green' : ''"
                         label="Enviar arquivo"
                       >
                     </q-btn>
@@ -62,7 +62,7 @@
                       @click="handlSendLinkVideo"
                       icon="mdi-message-video"
                       :disable="cDisableActions || desabilitarInput"
-                      :color="$q.dark.isActive ? 'white' : ''"
+                      :color="$q.dark.isActive ? 'green' : ''"
                       label="Enviar videoconferência"
                       >
                     </q-btn>
@@ -108,7 +108,7 @@
             >
 
               <template v-slot:prepend v-if="$q.screen.width < 500">
-                <q-btn  flat icon="mdi-emoticon-happy-outline" :disable="cDisableActions" dense round :color="$q.dark.isActive ? 'white' : ''">
+                <q-btn  flat icon="mdi-emoticon-happy-outline" :disable="cDisableActions" dense round :color="$q.dark.isActive ? 'green' : ''">
                   <q-tooltip content-class="text-bold"> Emoji </q-tooltip>
                   <q-menu anchor="top right" self="bottom middle" :offset="[5, 40]">
                     <VEmojiPicker style="width: 40vw" :showSearch="false" :emojisByRow="calculateEmojisByRow()" labelSearch="Localizar..." lang="pt-BR" @select="onInsertSelectEmoji" />
@@ -126,7 +126,7 @@
                   round
                   v-if="$q.screen.width < 500"
                   class="bg-padrao full-width"
-                  :color="$q.dark.isActive ? 'white' : ''"
+                  :color="$q.dark.isActive ? 'green' : ''"
                 >
                   <q-tooltip content-class=" text-bold"> Enviar arquivo </q-tooltip>
                 </q-btn>
@@ -173,7 +173,7 @@
               flat
               icon="mdi-send"
               class="bg-padrao btn-rounded q-mx-xs"
-              :color="$q.dark.isActive ? 'white' : ''"
+              :color="$q.dark.isActive ? 'green' : ''"
             >
               <q-tooltip content-class=" text-bold"> Enviar Mensagem </q-tooltip>
             </q-btn>
@@ -185,9 +185,9 @@
               flat
               icon="eva-mic-outline"
               class="btn-rounded q-mx-xs"
-              :color="$q.dark.isActive ? 'white' : ''"
+              :color="$q.dark.isActive ? 'green' : ''"
               :class="{
-                  'text-white bg-black': $q.dark.isActive,
+                  'text-green bg-black': $q.dark.isActive,
                   '': !$q.dark.isActive
                   }"
             >
@@ -200,7 +200,7 @@
               <q-skeleton animation="pulse-y" class="col-grow q-mx-md" type="text" />
               <div style="width: 200px" class="flex flex-center items-center" v-if="isRecordingAudio">
                 <q-btn flat icon="mdi-close" color="negative" @click="handleCancelRecordingAudio" class="bg-padrao btn-rounded q-mx-xs" />
-                <RecordingTimer class="text-bold" :class="{ 'text-white': $q.dark.isActive }" />
+                <RecordingTimer class="text-bold" :class="{ 'text-green': $q.dark.isActive }" />
                 <q-btn flat icon="mdi-send-circle-outline" color="positive" @click="handleStopRecordingAudio" class="bg-padrao btn-rounded q-mx-xs" />
               </div>
             </div>
@@ -216,7 +216,7 @@
               </div>
             </q-card-section>
             <q-card-section>
-              <q-img :src="urlMediaPreview.src" spinner-color="white" class="img-responsive mdi-image-auto-adjust q-uploader__file--img" style="height: 60vh; min-width: 55vw; max-width: 55vw" />
+              <q-img :src="urlMediaPreview.src" spinner-color="green" class="img-responsive mdi-image-auto-adjust q-uploader__file--img" style="height: 60vh; min-width: 55vw; max-width: 55vw" />
             </q-card-section>
             <q-card-actions align="center">
               <q-btn ref="qbtnPasteEnvioMensagem" label="Enviar" color="primary" v-close-popup @click="enviarMensagem" @keypress.enter.exact="enviarMensagem()" />

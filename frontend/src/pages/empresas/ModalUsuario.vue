@@ -156,27 +156,37 @@ export default {
       }
 
       const data = {
-        userData: {
-          email: this.usuarioSelecionado.email,
-          password: this.usuario.password,
-          name: this.usuarioSelecionado.name,
-          profile: this.usuarioSelecionado.profile
-        }
+        password: this.usuario.password
       }
 
-      await AdminUpdateUsuarios(this.usuarioSelecionado.id, data)
+      try {
+        await AdminUpdateUsuarios(this.usuarioSelecionado.id, data)
 
-      this.$q.notify({
-        type: 'positive',
-        message: 'Senha alterada com sucesso.',
-        position: 'top',
-        progress: true,
-        actions: [{
-          icon: 'close',
-          round: true,
-          color: 'white'
-        }]
-      })
+        this.$q.notify({
+          type: 'positive',
+          message: 'Senha alterada com sucesso.',
+          position: 'top',
+          progress: true,
+          actions: [{
+            icon: 'close',
+            round: true,
+            color: 'white'
+          }]
+        })
+      } catch (error) {
+        this.$q.notify({
+          type: 'negative',
+          message: 'Erro ao alterar a senha.',
+          position: 'top',
+          progress: true,
+          actions: [{
+            icon: 'close',
+            round: true,
+            color: 'white'
+          }]
+        })
+      }
+
       this.fecharModalPassword()
     },
     fecharModalPassword() {

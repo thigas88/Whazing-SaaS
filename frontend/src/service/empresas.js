@@ -114,3 +114,17 @@ export function AddMonthTenant (data) {
     method: 'post'
   })
 }
+
+export function UploadLogo(file, ref) {
+  const formData = new FormData()
+  formData.append('file', file)
+
+  return request({
+    url: `/admin/media-upload?ref=${ref}`,
+    method: 'post',
+    data: formData,
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  })
+}

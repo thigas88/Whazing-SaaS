@@ -11,7 +11,7 @@
             />
             <div class="login-content">
               <q-img
-                src="/logo.png"
+                :src="generateMediaUrl()"
                 spinner-color="white"
                 class="logo-image q-mb-lg q-px-md"
                 style="max-width: 100%"
@@ -229,6 +229,9 @@ export default {
     emailRedefinicao: { required, email }
   },
   methods: {
+    generateMediaUrl() {
+      return `${process.env.URL_API}/public/logos/signup.png`
+    },
     async fetchPlanData() {
       try {
         const response = await listPublic()

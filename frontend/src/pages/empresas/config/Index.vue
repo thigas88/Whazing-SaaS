@@ -206,6 +206,65 @@
         </div>
       </div>
 
+      <q-item-label caption class="q-mt-lg q-pl-sm">Módulo: White Label</q-item-label>
+      <q-separator spaced />
+
+          <q-input v-model="title" type="textarea" autogrow dense outlined
+            label="Titulo do Site:" input-style="min-height: 6vh; max-height: 9vh;" debounce="700"
+            @input="atualizarConfiguracao('title')" />
+
+      <q-item tag="label" v-ripple>
+        <q-item-section>
+          <q-item-label>Selecionar Arquivo</q-item-label>
+        </q-item-section>
+        <q-item-section avatar>
+          <q-select
+            style="width: 300px"
+            outlined
+            dense
+            v-model="selectedFileType"
+            :options="fileOptions"
+            emit-value
+            option-value="value"
+            option-label="label"
+            @input="handleFileTypeChange"
+          />
+        </q-item-section>
+      </q-item>
+
+      <div class="row q-px-md" v-if="selectedFileType">
+        <div class="col-12">
+          <q-item tag="label" v-ripple>
+            <q-item-section>
+              <q-item-label>Selecionar arquivo:</q-item-label>
+            </q-item-section>
+            <q-item-section avatar>
+              <input
+                type="file"
+                @change="onFileChangeLogo"
+                ref="fileInput"
+                class="q-mt-md"
+                :accept="fileAcceptType"
+              />
+            </q-item-section>
+          </q-item>
+        </div>
+      </div>
+
+      <q-item-label caption class="q-mt-lg q-pl-sm">Módulo: Configurações Gerais</q-item-label>
+      <q-separator spaced />
+
+      <div class="row q-px-md">
+        <div class="col-12">
+        <q-item-section>
+          <q-item-label>Limitador tamanho arquivos para evitar travamentos servidor e diminuir consumo de disco</q-item-label>
+        </q-item-section>
+          <q-input v-model="downloadLimit" type="number" autogrow dense outlined
+            label="Limite de Download de arquivos (MB):" input-style="min-height: 6vh; max-height: 9vh;" debounce="700"
+            @input="atualizarConfiguracao('downloadLimit')" />
+        </div>
+      </div>
+
     </q-list>
 
   </div>
@@ -213,6 +272,7 @@
 
 <script>
 import { ListarConfiguracoesGeneral, AlterarConfiguracaoGeneral, enviarArquivoPrivado } from '../../../service/configuracoesgeneral'
+import { UploadLogo } from '../../../service/empresas'
 export default {
   name: 'ConfiguracoesSaaS',
   data() {
@@ -221,6 +281,20 @@ export default {
         { label: 'Desativar', value: 'disabled' },
         { label: 'EFI Bank', value: 'efi' },
         { label: 'Owen Payments', value: 'owen' }
+      ],
+      fileOptions: [
+        { label: 'Logo Tela Login', value: 'login' },
+        { label: 'Logo Cadastro', value: 'signup' },
+        { label: 'Logo Tela Atendimento', value: 'atendimento' },
+        { label: 'Favicon 16x16', value: 'favicon-16x16' },
+        { label: 'Favicon 32x32', value: 'favicon-32x32' },
+        { label: 'Favicon 96x96', value: 'favicon-96x96' },
+        { label: 'Icon 128x128', value: 'icon-128x128' },
+        { label: 'Icon  192x192', value: 'icon-192x192' },
+        { label: 'Icon 256x256', value: 'icon-256x256' },
+        { label: 'Icon 384x384', value: 'icon-384x384' },
+        { label: 'Icon 512x512', value: 'icon-512x512' },
+        { label: 'Icone Favorito', value: 'favicon' }
       ],
       configuracoes: [],
       allowSignup: null,
@@ -244,7 +318,12 @@ export default {
       senhasmtp: '',
       fromemail: '',
       portasmtp: '',
-      smtpsecure: ''
+      smtpsecure: '',
+      downloadLimit: '',
+      title: '',
+      filename: '',
+      selectedFileType: null,
+      fileAcceptType: ''
     }
   },
   methods: {
@@ -308,6 +387,59 @@ export default {
             }]
           })
         }
+      }
+    },
+    async onFileChangeLogo(event) {
+      const file = event.target.files[0]
+      if (file) {
+        try {
+          await UploadLogo(file, this.selectedFileType)
+          this.filename = file.name
+          this.$q.notify({
+            type: 'positive',
+            message: 'Arquivo enviado com sucesso!',
+            progress: true,
+            actions: [{
+              icon: 'close',
+              round: true,
+              color: 'white'
+            }]
+          })
+        } catch (error) {
+          console.error('Erro ao enviar arquivo', error)
+          this.$q.notify({
+            type: 'negative',
+            message: 'Erro ao enviar arquivo!',
+            progress: true,
+            actions: [{
+              icon: 'close',
+              round: true,
+              color: 'white'
+            }]
+          })
+        }
+      }
+    },
+    handleFileTypeChange(value) {
+      // Atualiza o tipo de arquivo aceito com base na seleção
+      switch (value) {
+        case 'login':
+        case 'signup':
+        case 'atendimento':
+        case 'favicon-16x16':
+        case 'favicon-96x96':
+        case 'icon-128x128':
+        case 'icon-192x192':
+        case 'icon-256x256':
+        case 'icon-384x384':
+        case 'icon-512x512':
+          this.fileAcceptType = 'image/png'
+          break
+        case 'favicon':
+          this.fileAcceptType = 'image/x-icon'
+          break
+        default:
+          this.fileAcceptType = ''
       }
     }
   },

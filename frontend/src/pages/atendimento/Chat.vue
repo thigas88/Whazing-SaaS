@@ -36,9 +36,9 @@
     >
     <div
   style="margin-left: 30vw; display: flex; justify-content: center; align-items: center;">
-  <img src="/logo.png" style="width: 400px; height: 160px;">
+  <img :src="generateMediaUrl()" style="width: 400px; height: 160px;">
 </div>
-<h1 class="text-grey-6 row col justify-center"
+<h1 class="text-green row col justify-center"
   :class="{
       'full-width': $q.screen.xs
     }">
@@ -50,20 +50,24 @@
         enter-active-class="animated fadeIn"
         leave-active-class="animated fadeOut">
         <div v-if="scrollIcon">
-          <q-btn class="vac-icon-scroll" color="white" text-color="black" icon="mdi-arrow-down" round push ripple dense @click="scrollToBottom" />
+          <q-btn class="vac-icon-scroll" color="white" text-color="green" icon="mdi-arrow-down" round push ripple dense @click="scrollToBottom" />
         </div>
       </transition>
-
-<div v-if="ticketFocado.status === 'pending'"
+      <div v-if="ticketFocado.status === 'pending'"
   class="bg-transparent fast-messages-list flex flex-center"
 >
-  <q-btn
-   class="generate-button btn-rounded-50 q-ml-md"
-   :class="{'text-white': $q.dark.isActive,'q-ml-none q-mt-md q-mr-md': $q.screen.width < 500}"
-    icon="mdi-send-circle"
-    label="Iniciar o atendimento"
-    @click="iniciarAtendimento(ticketFocado)"
-  />
+        <q-btn @click="iniciarAtendimento(ticketFocado)"
+            flat
+            icon="mdi-send-circle"
+            label="Iniciar o atendimento"
+            class="generate-button btn-rounded-50"
+            :class="{'generate-button-dark' : $q.dark.isActive}">
+
+          <q-tooltip content-class="text-bold">
+            Apagar tickets em Massa
+          </q-tooltip>
+        </q-btn>
+
 </div>
 
     </div>
@@ -286,6 +290,9 @@ export default {
     }
   },
   methods: {
+    generateMediaUrl() {
+      return `${process.env.URL_API}/public/logos/atendimento.png`
+    },
     onClickOpenAgendamentoMensagem() {
       this.$q.dialog({
         component: () => import('./AgendamentoMensagem.vue'),

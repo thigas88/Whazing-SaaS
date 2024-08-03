@@ -11,7 +11,7 @@
             />
             <div class="login-content">
               <q-img
-                src="/logo.png"
+                :src="generateMediaUrl()"
                 spinner-color="white"
                 class="logo-image q-mb-lg q-px-md"
                 style="max-width: 100%"
@@ -232,6 +232,9 @@ export default {
     confirmarNovaSenha: { required }
   },
   methods: {
+    generateMediaUrl() {
+      return `${process.env.URL_API}/public/logos/login.png`
+    },
     redirecionarParaCadastro() {
       this.$router.push('/signup')
     },

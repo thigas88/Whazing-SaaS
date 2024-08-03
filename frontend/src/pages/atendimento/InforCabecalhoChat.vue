@@ -1,6 +1,6 @@
 <template>
   <div>
-    <q-header class="bg-white text-grey-10 no-border-radius">
+    <q-header class="bg-white text-black no-border-radius">
       <q-toolbar style="min-height: 60px; height: 60px;"
         class="no-border-radius q-pa-none ">
         <q-btn flat
@@ -9,7 +9,7 @@
           icon="mdi-menu"
           v-if="$q.screen.lt.md"
           class="q-mx-xs-none q-ml-md"
-          :color="$q.dark.isActive ? 'white' : ''"
+          :color="$q.dark.isActive ? 'green' : ''"
           @click="$root.$emit('infor-cabecalo-chat:acao-menu')" />
         <q-item clickable
           v-ripple
@@ -61,7 +61,7 @@
               autofocus
               icon="eva-refresh-outline"
               :class="{
-                'text-white bg-black': $q.dark.isActive,
+                'text-green bg-black': $q.dark.isActive,
                 'tab-item': !$q.dark.isActive
                 }"
               class="btn-rounded"
@@ -75,12 +75,12 @@
               flat
               icon="eva-clock-outline"
               :class="{
-                'text-white bg-black': $q.dark.isActive,
+                'text-green bg-black': $q.dark.isActive,
                 'tab-item': !$q.dark.isActive
                 }"
               class="btn-rounded"
               :disable="cticket.status == 'closed'">
-              <q-tooltip content-class="bg-primary text-bold">
+              <q-tooltip content-class="text-bold">
                 Agendamento de mensagem
               </q-tooltip>
             </q-btn>
@@ -88,38 +88,38 @@
               flat
               icon="eva-arrow-back-outline"
               :class="{
-                'text-white bg-black': $q.dark.isActive,
+                'text-green bg-black': $q.dark.isActive,
                 'tab-item': !$q.dark.isActive
                 }"
               class="btn-rounded"
               :disable="cticket.status == 'closed'">
-              <q-tooltip content-class="bg-primary text-bold">
+              <q-tooltip content-class="text-bold">
                 Retornar Ticket para a Fila
               </q-tooltip>
             </q-btn>
             <q-btn @click="$emit('updateTicket:resolver')"
               :class="{
-                'text-white bg-black': $q.dark.isActive,
+                'text-green bg-black': $q.dark.isActive,
                 'tab-item': !$q.dark.isActive
                 }"
               flat
               class="btn-rounded"
               icon="eva-checkmark-circle-2-outline"
               :disable="cticket.status == 'closed'">
-              <q-tooltip content-class="bg-primary text-bold">
+              <q-tooltip content-class="text-bold">
                 Resolver
               </q-tooltip>
             </q-btn>
             <q-btn @click="listarFilas"
               flat
               :class="{
-                'text-white bg-black': $q.dark.isActive,
+                'text-green bg-black': $q.dark.isActive,
                 'tab-item': !$q.dark.isActive
                 }"
               class="btn-rounded"
               :disable="cticket.status == 'closed'">
               <q-icon name="eva-corner-down-right-outline" />
-              <q-tooltip content-class="bg-primary text-bold">
+              <q-tooltip content-class="text-bold">
                 Transferir
               </q-tooltip>
             </q-btn>
@@ -147,7 +147,7 @@
                   'bg-black': $q.dark.isActive
 
                 }">
-                <q-tooltip content-class="bg-primary text-bold">
+                <q-tooltip content-class="text-bold">
                   Resolver
                 </q-tooltip>
               </q-fab-action>
@@ -160,7 +160,7 @@
                   'bg-black': $q.dark.isActive
 
                 }">
-                <q-tooltip content-class="bg-primary text-bold">
+                <q-tooltip content-class="text-bold">
                   Retornar Ticket para a Fila
                 </q-tooltip>
               </q-fab-action>
@@ -173,7 +173,7 @@
                   'bg-black-dark': $q.dark.isActive
                 }">
                 <q-icon name="mdi-transfer" />
-                <q-tooltip content-class="bg-primary text-bold">
+                <q-tooltip content-class="text-bold">
                   Transferir
                 </q-tooltip>
               </q-fab-action>
@@ -186,7 +186,7 @@
 
                 }">
                 <q-icon name="mdi-message-text-clock-outline" />
-                <q-tooltip content-class="bg-primary text-bold">
+                <q-tooltip content-class="primary text-bold">
                   Agendamento de mensagem
                 </q-tooltip>
               </q-fab-action>
@@ -423,7 +423,7 @@ export default {
           read: 1,
           fromMe: true,
           mediaUrl: '',
-          body: 'Seu atendimento esta sendo transferido Por Favor aguarde, já vamos te atender!',
+          body: 'Seu atendimento está sendo transferido. Por favor, aguarde um momento; em breve, alguém irá atendê-lo.',
           scheduleDate: null,
           quotedMsg: null,
           idFront: uid()

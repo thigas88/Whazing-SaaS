@@ -39,7 +39,7 @@ export default {
             read: 1,
             fromMe: true,
             mediaUrl: '',
-            body: `${this.getGreeting()} ${contactName}, meu nome é ${username} e agora vou prosseguir com seu atendimento!`,
+            body: `${this.getGreeting()}, ${contactName}. Meu nome é ${username} e agora irei prosseguir com seu atendimento.`,
             scheduleDate: null,
             quotedMsg: null,
             idFront: uid()

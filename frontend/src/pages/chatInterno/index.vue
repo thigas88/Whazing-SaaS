@@ -1,5 +1,5 @@
 <template>
-    <div class="wall whatsapp-app position-relative " :class="$q.dark.isActive ? ('text-white bg-black') : 'bg-grey-4'" :style="style">
+    <div class="wall whatsapp-app position-relative " :class="$q.dark.isActive ? ('text-green bg-black') : 'bg-grey-4'" :style="style">
       <div class="bar-background">s</div>
       <q-layout view="lHh Lpr lFf" class="wall-box whatsapp-layout shadow-3" container>
       <q-header class="full-width" style="position: fixed !important; top: unset; bottom:unset ">
@@ -24,23 +24,23 @@
 
       <q-drawer class="overflow-y-off" v-model="leftDrawerOpen" show-if-above bordered :breakpoint="690" >
         <q-toolbar class="bg-grey-3">
-          <q-btn flat class="btn-rounded" :class="$q.dark.isActive ? ('text-white bg-black') : ''" icon="eva-undo-outline" @click="() => $router.push({ name: 'home-dashboard' })">
+          <q-btn flat class="btn-rounded" :class="$q.dark.isActive ? ('text-green bg-black') : ''" icon="eva-undo-outline" @click="() => $router.push({ name: 'home-dashboard' })">
             <q-tooltip content-class="text-bold" >
               Retornar ao menu
             </q-tooltip>
           </q-btn>
           <q-separator />
-          <q-btn flat class="btn-rounded q-ml-xs" :class="$q.dark.isActive ? ('text-white bg-black') : ''" icon="eva-message-circle-outline" @click="() => $router.push({ name: 'chat-empty' })">
+          <q-btn flat class="btn-rounded q-ml-xs" :class="$q.dark.isActive ? ('text-green bg-black') : ''" icon="eva-message-circle-outline" @click="() => $router.push({ name: 'chat-empty' })">
             <q-tooltip content-class="text-bold">
               Atendimento
             </q-tooltip>
           </q-btn>
           <q-space />
-<q-btn round flat icon="close" class="WAL__drawer-close" @click="toggleLeftDrawer" />
+<!-- <q-btn round flat icon="close" class="WAL__drawer-close" @click="toggleLeftDrawer" /> -->
         </q-toolbar>
 
-        <q-toolbar class="bg-grey-2">
-          <q-input rounded outlined dense class="WAL__field full-width" bg-color="white" v-model="searchParam"
+        <q-toolbar>
+          <q-input rounded outlined dense class="WAL__field full-width" bg-color="grey-7" v-model="searchParam"
             @input="buscarTicketFiltro()" placeholder="Pesquisar...">
             <template v-slot:prepend>
               <q-icon name="search" />
@@ -48,9 +48,9 @@
           </q-input>
         </q-toolbar>
 
-        <q-tabs v-model="tab" inline-label class="q-pa-sm flex-gap-1 btn-rounded" dense narrow-indicator :active-bg-color="$q.dark.isActive ? 'primary' : 'grey-3'" align="justify" :class="{'text-white': $q.dark.isActive, 'text-black': !$q.dark.isActive}">
-          <q-tab :ripple="false" class="q-mr-sm btn-rounded-50 " name="users" icon="eva-person-outline" :class="$q.dark.isActive ? ('text-white') : 'bg-grey-3 q-tab-personalized'" label="Usuários"></q-tab>
-          <q-tab :ripple="false" class=" btn-rounded-50 " name="groups" icon="eva-people-outline" label="Equipes" :class="$q.dark.isActive ? ('text-white') : 'bg-grey-3 q-tab-personalized'"></q-tab>
+        <q-tabs v-model="tab" inline-label class="q-pa-sm flex-gap-1 btn-rounded" dense narrow-indicator :active-bg-color="$q.dark.isActive ? 'primary' : 'grey-3'" align="justify" :class="{'text-green': $q.dark.isActive, 'text-black': !$q.dark.isActive}">
+          <q-tab :ripple="false" class="q-mr-sm btn-rounded-50 " name="users" icon="eva-person-outline" :class="$q.dark.isActive ? ('text-green') : 'bg-grey-3 q-tab-personalized'" label="Usuários"></q-tab>
+          <q-tab :ripple="false" class=" btn-rounded-50 " name="groups" icon="eva-people-outline" label="Equipes" :class="$q.dark.isActive ? ('text-green') : 'bg-grey-3 q-tab-personalized'"></q-tab>
         </q-tabs>
         <template>
           <q-tab-panels v-model="tab" animated swipeable>
@@ -66,7 +66,7 @@
                           {{ contact.isOnline ? 'Online' : 'Offline' }}
                         </q-tooltip>
                         <q-badge floating style="background-color: green;" v-if="contact.isOnline"></q-badge>
-                        <q-badge floating style="background-color: gray;" v-if="!contact.isOnline"> </q-badge>
+                        <q-badge floating style="background-color: red;" v-if="!contact.isOnline"> </q-badge>
                       </q-avatar>
                     </q-item-section>
 
@@ -133,20 +133,20 @@
       </q-drawer>
 
       <q-page-container class="bg-grey-2" :style="styleChatArea">
-        <q-scroll-area ref="chatPanel" class="scroll-y chatarea" :style="cStyleScrolll" @scroll="scrollArea">
-          <div class="q-pa-md">
-            <transition-group appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
-              <div v-for="(message, index) in messages" :key="message.id" class="text-weight-medium">
-                <hr v-if="isLineDate" :key="'hr-' + index" class="hr-text q-mt-lg q-mb-md"
-                  :data-content="formatarData(message.timestamp)"
-                  v-show="index === 0 || formatarData(message.timestamp) !== formatarData(messages[index - 1].timestamp)">
-                <q-chat-message :ref="message.id" :id="message.id"
-                  :name="message.sender.id == usuario.userId ? 'Eu' : message.sender.name"
-                  :bg-color="message.sender == usuario.userId ? 'grey-2' : $q.dark.isActive ? 'blue-2' : 'blue-1'"
-                  :stamp="dataInWordsMessage(Number(message.timestamp))" :sent="message.sender.id == usuario.userId">
-                  <div style="width: 200px">
-                    <q-icon v-if="message.sender == usuario.userId" class="absolute-bottom-right q-pr-xs q-pb-xs"
-                      name="mdi-check-all" size="1.2em" :color="message.read ? 'blue-12' : ''" />
+  <q-scroll-area ref="chatPanel" class="scroll-y chatarea" :style="cStyleScrolll" @scroll="scrollArea">
+    <div class="q-pa-md">
+      <transition-group appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
+        <div v-for="(message, index) in messages" :key="message.id" class="text-weight-medium">
+          <hr v-if="isLineDate" :key="'hr-' + index" class="hr-text q-mt-lg q-mb-md"
+            :data-content="formatarData(message.timestamp)"
+            v-show="index === 0 || formatarData(message.timestamp) !== formatarData(messages[index - 1].timestamp)">
+          <q-chat-message :ref="message.id" :id="message.id"
+            :name="message.sender.id == usuario.userId ? 'Eu' : message.sender.name"
+            :bg-color="message.sender.id == usuario.userId ? 'blue-4' : 'green-4'"
+            :stamp="dataInWordsMessage(Number(message.timestamp))" :sent="message.sender.id == usuario.userId">
+            <div style="width: 200px">
+              <q-icon v-if="message.sender.id == usuario.userId" class="absolute-bottom-right q-pr-xs q-pb-xs"
+                name="mdi-check-all" size="1.2em" :color="message.read ? 'blue-12' : ''" />
 
                     <!-- IMAGEM -->
                     <template v-if="message.mediaType === 'image'">
@@ -207,12 +207,12 @@
       <q-footer>
         <q-toolbar class="bg-grey-3 text-black row">
           <template>
-            <q-btn v-if="$q.screen.width > 500" :class="$q.dark.isActive ? ('text-white bg-black') : ''" icon="mdi-paperclip" round flat :disable="cDisableActions" @click="abrirEnvioArquivo" dense :color="$q.dark.isActive ? 'white' : ''">
+            <q-btn v-if="$q.screen.width > 500" :class="$q.dark.isActive ? ('text-green bg-black') : ''" icon="mdi-paperclip" round flat :disable="cDisableActions" @click="abrirEnvioArquivo" dense :color="$q.dark.isActive ? 'green' : ''">
               <q-tooltip content-class="text-bold">
                 Anexar Arquivo
               </q-tooltip>
             </q-btn>
-            <q-btn v-if="$q.screen.width > 500" flat dense icon="mdi-emoticon-happy-outline" :disable="cDisableActions || cMostrarEnvioArquivo" class="btn-rounded q-mx-xs" :class="$q.dark.isActive ? ('text-white bg-black') : ''" :color="$q.dark.isActive ? 'white' : ''">
+            <q-btn v-if="$q.screen.width > 500" flat dense icon="mdi-emoticon-happy-outline" :disable="cDisableActions || cMostrarEnvioArquivo" class="btn-rounded q-mx-xs" :class="$q.dark.isActive ? ('text-green bg-black') : ''" :color="$q.dark.isActive ? 'green' : ''">
               <q-tooltip content-class="text-bold">
                 Emoji
               </q-tooltip>
@@ -228,7 +228,7 @@
               v-model="newMenssage" :value="newMenssage">
               <template v-slot:prepend v-if="$q.screen.width < 500">
                 <q-btn flat icon="mdi-emoticon-happy-outline" :disable="cDisableActions" dense round
-                  :color="$q.dark.isActive ? 'white' : ''">
+                  :color="$q.dark.isActive ? 'green' : ''">
                   <q-tooltip content-class="text-bold">
                     Emoji
                   </q-tooltip>
@@ -240,13 +240,13 @@
               </template>
             </q-input>
             <q-file :disable="cDisableActions" ref="PickerFileMessage" id="PickerFileMessage"
-              v-show="cMostrarEnvioArquivo" v-model="arquivos" class="col-grow q-mx-xs PickerFileMessage" bg-color="white"
+              v-show="cMostrarEnvioArquivo" v-model="arquivos" class="col-grow q-mx-xs PickerFileMessage" bg-color="green"
               input-style="max-height: 30vh" outlined use-chips multiple autogrow dense rounded append :max-files="5"
               :max-file-size="15728640" :max-total-size="31457280"
               @keydown.exact.enter.prevent="() => arquivos.length > 0 ? sendMessage() : ''"
               accept=".txt, .xml, .jpg, .png, image/jpeg, .pdf, .doc, .docx, .mp4, .xls, .xlsx, .jpeg, .zip, .ppt, .pptx, image/*"
               @rejected="onRejectedFiles" />
-              <q-btn :class="$q.dark.isActive ? ('text-white bg-black') : ''" ref="btnEnviarMensagem" @click="sendMessage()" flat icon="mdi-send" :disable="cDisableActions" class="btn-rounded q-mx-xs" :color="$q.dark.isActive ? 'white' : ''">
+              <q-btn :class="$q.dark.isActive ? ('text-green bg-black') : ''" ref="btnEnviarMensagem" @click="sendMessage()" flat icon="mdi-send" :disable="cDisableActions" class="btn-rounded q-mx-xs" :color="$q.dark.isActive ? 'green' : ''">
               <q-tooltip content-class=" text-bold">
                 Enviar Mensagem
               </q-tooltip>

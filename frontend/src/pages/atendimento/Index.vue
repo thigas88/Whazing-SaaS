@@ -41,7 +41,7 @@
             <q-tooltip>Usuário</q-tooltip>
           </q-btn>
           <q-space />
-          <q-btn flat class="btn-rounded" :class="$q.dark.isActive ? 'text-white bg-black' : ''" icon="eva-message-circle-outline" @click="() => $router.push({ name: 'chat-interno' })" :disable="loadingMount">
+          <q-btn flat class="btn-rounded" :class="$q.dark.isActive ? 'text-green bg-black' : ''" icon="eva-message-circle-outline" @click="() => $router.push({ name: 'chat-interno' })" :disable="loadingMount">
             <q-tooltip content-class="text-bold"> Chat Interno </q-tooltip>
             <q-badge v-if="this.notificacaoInternaNaoLida > 0"
               color="red"
@@ -49,10 +49,10 @@
               class="badge-left"
             > {{ this.notificacaoInternaNaoLida }}</q-badge>
           </q-btn>
-          <q-btn flat class="btn-rounded" :class="$q.dark.isActive ? 'text-white bg-black' : ''" icon="refresh" @click="reloadPage" :disable="loadingMount">
+          <q-btn flat class="btn-rounded" :class="$q.dark.isActive ? 'text-green bg-black' : ''" icon="refresh" @click="reloadPage" :disable="loadingMount">
             <q-tooltip content-class="text-bold"> Atualizar Página </q-tooltip>
           </q-btn>
-          <q-btn style="margin-right: 5px;" flat class="btn-rounded" :class="$q.dark.isActive ? 'text-white bg-black' : ''" icon="eva-undo-outline" @click="() => $router.push({ name: 'home-dashboard' })" :disable="loadingMount">
+          <q-btn style="margin-right: 5px;" flat class="btn-rounded" :class="$q.dark.isActive ? 'text-green bg-black' : ''" icon="eva-undo-outline" @click="() => $router.push({ name: 'home-dashboard' })" :disable="loadingMount">
             <q-tooltip content-class="text-bold"> Retornar ao menu </q-tooltip>
           </q-btn>
         </q-toolbar>
@@ -158,13 +158,13 @@
             </q-menu>
             <q-tooltip content-class="text-bold"> Filtro Avançado </q-tooltip>
           </q-btn>
-          <q-btn flat class="bg-grey-3 btn-rounded-50" :class="$q.dark.isActive ? 'text-white bg-black' : ''" @click="$q.screen.lt.md ? (modalNovoTicket = true) : $router.push({ name: 'chat-contatos' })" style="flex: 1;" v-if="canAccessPageContact">
+          <q-btn flat class="bg-grey-3 btn-rounded-50" :class="$q.dark.isActive ? 'text-green bg-black' : ''" @click="$q.screen.lt.md ? (modalNovoTicket = true) : $router.push({ name: 'chat-contatos' })" style="flex: 1;" v-if="canAccessPageContact">
             Contatos
           <q-tooltip :content-class="`${$q.dark.isActive ? 'text-white bg-black' : ''} text-bold`">Contatos</q-tooltip>
           </q-btn>
-          <q-btn flat class="bg-grey-3 btn-rounded-50" :class="$q.dark.isActive ? 'text-white bg-black' : ''" @click="showNotification()" v-if="hasMoreTickets"  style="flex: 1;">
+          <q-btn flat class="bg-grey-3 btn-rounded-50" :class="$q.dark.isActive ? 'text-green bg-black' : ''" @click="showNotification()" v-if="hasMoreTickets"  style="flex: 1;">
             Atendimentos
-            <q-tooltip :content-class="`${$q.dark.isActive ? 'text-white bg-black' : ''} text-bold`"> Carregar Mais Atendimentos </q-tooltip>
+            <q-tooltip :content-class="`${$q.dark.isActive ? 'text-green bg-black' : ''} text-bold`"> Carregar Mais Atendimentos </q-tooltip>
           </q-btn>
           </div>
 
@@ -193,7 +193,7 @@
               inline-label
               align="justify"
               :class="{
-                'text-white': $q.dark.isActive,
+                'text-green': $q.dark.isActive,
                 'text-black': !$q.dark.isActive
               }"
 
@@ -204,7 +204,7 @@
               :ripple="false"
               name="private"
               class="btn-rounded-50"
-              :class="$q.dark.isActive ? 'bg-black text-white' : 'bg-grey-3 btn-rounded-50 q-tab-personalized'"
+              :class="$q.dark.isActive ? 'bg-black text-green' : 'bg-grey-3 btn-rounded-50 q-tab-personalized'"
               icon="eva-person-outline"
             >
 
@@ -222,7 +222,7 @@
               :ripple="false"
               name="groups"
               class="btn-rounded-50"
-              :class="$q.dark.isActive ? 'bg-black text-white' : 'bg-grey-3 btn-rounded-50 q-tab-personalized'"
+              :class="$q.dark.isActive ? 'bg-black text-green' : 'bg-grey-3 btn-rounded-50 q-tab-personalized'"
               icon="eva-people-outline"
             >
             <q-badge
@@ -285,7 +285,7 @@
                 icon="eva-message-circle-outline"
                 label="Aberto"
                 :class="{
-                'text-white': $q.dark.isActive,
+                'text-green': $q.dark.isActive,
                 'tab-item': !$q.dark.isActive
                 }"
               >
@@ -302,7 +302,7 @@
                 icon="eva-clock-outline"
                 label="Pendente"
                 :class="{
-                'text-white': $q.dark.isActive,
+                'text-green': $q.dark.isActive,
                 'tab-item': !$q.dark.isActive
                 }"
               >
@@ -319,7 +319,7 @@
                 icon="eva-lock-outline"
                 label="Fechado"
                 :class="{
-                'text-white': $q.dark.isActive,
+                'text-green': $q.dark.isActive,
                 'tab-item': !$q.dark.isActive
                 }"
               >
@@ -337,7 +337,7 @@
                 icon="mdi-robot-outline"
                 label="Chatbot"
                 :class="{
-                'text-white': $q.dark.isActive,
+                'text-green': $q.dark.isActive,
                 'tab-item': !$q.dark.isActive
                 }"
               >
@@ -371,7 +371,7 @@
                 icon="eva-message-circle-outline"
                 label="Aberto"
                 :class="{
-                'text-white': $q.dark.isActive,
+                'text-green': $q.dark.isActive,
                 'text-black': !$q.dark.isActive
                 }"
               >
@@ -388,7 +388,7 @@
                 icon="eva-clock-outline"
                 label="Pendente"
                 :class="{
-                'text-white': $q.dark.isActive,
+                'text-green': $q.dark.isActive,
                 'text-black': !$q.dark.isActive
                 }"
               >
@@ -405,7 +405,7 @@
                 icon="eva-lock-outline"
                 label="Fechado"
                 :class="{
-                'text-white': $q.dark.isActive,
+                'text-green': $q.dark.isActive,
                 'text-black': !$q.dark.isActive
                 }"
               >
@@ -509,13 +509,21 @@
         <router-view :mensagensRapidas="mensagensRapidas" :key="ticketFocado.id"></router-view>
       </q-page-container>
 
-      <q-drawer v-if="!cRouteContatos && ticketFocado.id" v-model="drawerContact" show-if-above bordered side="right" class="dados-contato" content-class="bg-grey-3">
-        <div class="flex justify-start items-end bg-white full-width no-border-radius q-pa-sm" style="height: 60px">
-          <span class=" text-h6"> <q-btn flat class="btn-small" @click="toggleDrawer" label="" icon="mdi-close" :color="$q.dark.isActive ? ('white') : 'primary'"/>  Dados Contato </span>
-        </div>
+      <q-drawer v-if="!cRouteContatos && ticketFocado.id && drawerContact"
+          show-if-above
+          bordered
+          side="right"
+          class="dados-contato"
+          content-class="bg-grey-3">
+    <div class="flex justify-start items-end bg-white full-width no-border-radius q-pa-sm" style="height: 60px">
+        <span class=" text-h6">
+            <q-btn flat class="btn-small" @click="toggleDrawer" label="" icon="mdi-close" :color="$q.dark.isActive ? ('green') : 'primary'"/>
+            Dados Contato
+        </span>
+    </div>
 
         <q-scroll-area style="height: calc(100vh - 70px)">
-          <div >
+          <div>
             <!--<q-card class="bg-white btn-rounded" style="width: 100%" bordered flat>
               <q-card-section class="text-bold q-pa-sm">
                 <q-btn flat class="btn-small" @click="toggleDrawer" label="" icon="mdi-close" />
@@ -529,7 +537,7 @@
                   <q-icon name="mdi-account" style="width: 100px; height: 100px" size="6em" color="grey-5" v-if="!ticketFocado.contact.profilePicUrl" />
                   <q-img :src="ticketFocado.contact.profilePicUrl" style="width: 100px; height: 100px">
                     <template v-slot:error>
-                      <q-icon name="mdi-account" size="1.5em" :color="$q.dark.isActive ? ('white') : 'grey-5'" />
+                      <q-icon name="mdi-account" size="1.5em" :color="$q.dark.isActive ? ('green') : 'grey-5'" />
                     </template>
                   </q-img>
                 </q-avatar>
@@ -538,7 +546,7 @@
                 </div>
                 <div class="text-caption q-mt-sm blur-effect"  style="font-size: 14px" id="number">
                   <template v-if="ticketFocado.contact.number">
-                    <a :class="$q.dark.isActive ? ('text-white') : ''" :href="getPhoneNumberLink(ticketFocado.contact.number)">
+                    <a :class="$q.dark.isActive ? ('text-green') : ''" :href="getPhoneNumberLink(ticketFocado.contact.number)">
                       {{ ticketFocado.contact.number }}
                     </a>
                   </template>
@@ -555,7 +563,7 @@
                   </template>
                 </div>
 
-                <q-btn flat class="btn-rounded-50 btn-outline btn-small" icon="eva-edit-outline" label="Editar" @click="editContact(ticketFocado.contact.id)" :class="$q.dark.isActive ? ('text-white') : ''"/>
+                <q-btn flat class="btn-rounded-50 btn-outline btn-small" icon="eva-edit-outline" label="Editar" @click="editContact(ticketFocado.contact.id)" :class="$q.dark.isActive ? ('text-green') : ''"/>
                 <template v-if="cIsExtraInfo">
                   <q-list>
                     <q-item v-for="(info, idx) in ticketFocado.contact.extraInfo" :key="idx">
@@ -570,7 +578,7 @@
             <q-card class="bg-white border-radius-none q-mt-sm" style="width: 100%" flat>
               <q-card-section class="text-bold text-center q-pa-sm">
                 <q-btn flat class="btn-rounded-50 btn-outline btn-small" icon="mdi-timeline-text-outline"
-                :class="$q.dark.isActive ? ('text-white') : ''" @click="abrirModalLogs">
+                :class="$q.dark.isActive ? ('text-green') : ''" @click="abrirModalLogs">
                   <q-tooltip content-class="bg-primary text-bold">
                     Logs
                   </q-tooltip>
@@ -579,11 +587,11 @@
             </q-card>
 
             <q-card class="bg-white q-mt-sm border-radius-none q-pa-sm" style="width: 100%" flat :key="ticketFocado.id + $uuid()">
-              <q-card-section class="text-bold q-pb-none" :class="$q.dark.isActive ? ('text-white') : ''">
+              <q-card-section class="text-bold q-pb-none" :class="$q.dark.isActive ? ('text-green') : ''">
                 Etiquetas
                 <q-separator />
               </q-card-section>
-              <q-card-section class="q-pa-none" :class="$q.dark.isActive ? ('text-white') : ''">
+              <q-card-section class="q-pa-none" :class="$q.dark.isActive ? ('text-green') : ''">
                 <q-select
                   square
                   borderless
@@ -597,7 +605,7 @@
                   map-options
                   dropdown-icon="add"
                   @input="tagSelecionada"
-                  :content-class="$q.dark.isActive ? ('text-white') : ''"
+                  :content-class="$q.dark.isActive ? ('text-green') : ''"
                 >
                   <template v-slot:option="{ itemProps, itemEvents, opt, selected, toggleOption }">
                     <q-item v-bind="itemProps" v-on="itemEvents">
@@ -628,7 +636,7 @@
             </q-card>
 
             <q-card class="bg-white q-mt-sm border-radius-none q-pa-sm" style="width: 100%" flat :key="ticketFocado.id + $uuid()">
-              <q-card-section class="text-bold q-pb-none" :class="$q.dark.isActive ? ('text-white') : ''">
+              <q-card-section class="text-bold q-pb-none" :class="$q.dark.isActive ? ('text-green') : ''">
                 Carteira
                 <q-separator />
               </q-card-section>
@@ -675,7 +683,7 @@
             </q-card>
 
             <q-card class="bg-white q-mt-sm border-radius-none q-pa-sm" style="width: 100%; margin-bottom: 2vh" flat :key="ticketFocado.id + $uuid()" v-if="ticketFocado.channel !== 'instagram' && ticketFocado.channel !== 'telegram'">
-              <q-card-section class="text-bold q-pb-none" :class="$q.dark.isActive ? ('text-white') : ''">
+              <q-card-section class="text-bold q-pb-none" :class="$q.dark.isActive ? ('text-green') : ''">
                 Mensagens Agendadas
                 <q-separator />
               </q-card-section>
@@ -745,7 +753,7 @@
                       :icon="(messagesLog[log.type] && messagesLog[log.type].icon) || ''"
                     >
                       <template v-slot:title>
-                        <div :class="{ 'text-white': $q.dark.isActive }" style="width: calc(100% - 20px)">
+                        <div :class="{ 'text-green': $q.dark.isActive }" style="width: calc(100% - 20px)">
                           <div class="row col text-bold text-body2">{{ (log.user && log.user.name) || 'Bot' }}:</div>
                           <div class="row col">{{ messagesLog[log.type] && messagesLog[log.type].message }}</div>
                         </div>
@@ -1274,7 +1282,7 @@ export default {
       this.loadMoreOpenTickets()
     },
     toggleDrawer() {
-      this.drawerContact = !this.drawerContact
+      this.drawerContact = false
     },
     getPhoneNumberLink(number) {
       if ((number.startsWith('55')) && (number.charAt(4) > 5)) {
