@@ -8,6 +8,8 @@ public/*
 logs/
 WWebJS/
 
+backend/*
+frontend/*
 
 yarn.lock
 yarn-error.log

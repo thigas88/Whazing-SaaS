@@ -219,13 +219,6 @@ export default {
   async mounted() {
     this.tagsDoTicket = await this.obterInformacoes(this.ticket, 'tags')
     this.walletsDoTicket = await this.obterInformacoes(this.ticket, 'carteiras')
-
-    this.$store.subscribe(async (mutation, state) => {
-      if (mutation.type === 'UPDATE_CONTACT' && mutation.payload.id === this.ticket.contactId) {
-        this.tagsDoTicket = await this.obterInformacoes(this.ticket, 'tags')
-        this.walletsDoTicket = await this.obterInformacoes(this.ticket, 'carteiras')
-      }
-    })
   },
   methods: {
     closeModal() {
@@ -253,24 +246,40 @@ export default {
         return ''
       }
     },
-    async obterInformacoes(ticket, tipo) {
-      try {
-        const contato = await ObterContato(ticket.contactId)
-        if (contato) {
-          if (tipo === 'tags') {
-            const tags = contato.data.tags
-            return tags.map(tag => ({ tag: tag.tag, color: tag.color }))
-          } else if (tipo === 'carteiras') {
-            const wallets = contato.data.wallets
-            return wallets.map(wallet => ({ wallet: wallet.name }))
-          }
-        }
-        return []
-      } catch (error) {
-        console.error(`Erro ao obter ${tipo}:`, error)
-        return []
+  async obterInformacoes(ticket, tipo) {
+    try {
+      // Verifica se o tipo é válido antes de tentar a requisição
+      if (!['tags', 'carteiras'].includes(tipo)) {
+        console.error(`Tipo de informação inválido: ${tipo}`);
+        return [];
       }
-    },
+
+      const contato = await ObterContato(ticket.contactId);
+
+      // Verifica se o contato foi retornado corretamente
+      if (!contato || !contato.data) {
+        console.error('Contato não encontrado ou dados inválidos');
+        return [];
+      }
+
+      // Verifica se o tipo de dado solicitado está disponível
+      if (tipo === 'tags') {
+        const tags = contato.data.tags || [];
+        return tags.map(tag => ({ tag: tag.tag, color: tag.color }));
+      } else if (tipo === 'carteiras') {
+        const wallets = contato.data.wallets || [];
+        return wallets.map(wallet => ({ wallet: wallet.name }));
+      }
+
+      // Retorna um array vazio se o tipo não for reconhecido
+      return [];
+    } catch (error) {
+      console.error(`Erro ao obter ${tipo}:`, error);
+
+      // Retorna um array vazio em caso de erro para não quebrar a aplicação
+      return [];
+    }
+  },
     dataInWords (timestamp, updated) {
       let data = parseJSON(updated)
       if (timestamp) {
