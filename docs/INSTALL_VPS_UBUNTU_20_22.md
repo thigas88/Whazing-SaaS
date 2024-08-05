@@ -372,6 +372,12 @@ npm install --force
 npm i @quasar/cli
 ```
 
+. Update Blowser list
+
+```bash
+npx update-browserslist-db@latest
+```
+
 45. Buildando o frontend
 
 ```bash
@@ -577,8 +583,68 @@ su deploy
 cd /home/deploy/whazing
 ```
 
-03. Acesse pasta instalacao
+03. Atulizando pull
 
 ```bash
-cd /home/deploy/whazing
+git pull
+```
+
+04. Descompactar
+
+```bash
+unzip -o whazing.zip
+```
+
+05. Garantir permissao corretas
+
+```bash
+chmod 775 /home/deploy/whazing/ -Rf
+```
+
+06. acessar pasta backend
+
+```bash
+cd /home/deploy/whazing/backend
+```
+
+07. Instalando as dependências
+
+```bash
+npm install --force
+```
+
+08. Atualizar as tabelas no BD
+
+```bash
+npx sequelize db:migrate
+```
+
+09. acessar pasta frontend
+
+```bash
+cd /home/deploy/whazing/frontend
+```
+
+10. Instalando as dependências
+
+```bash
+npm install --force
+```
+
+11. Update Blowser list
+
+```bash
+npx update-browserslist-db@latest
+```
+
+11. Buildando o frontend
+
+```bash
+npm run build
+```
+
+12. Reiniciar serviços PM2
+
+```bash
+pm2 restart all
 ```
