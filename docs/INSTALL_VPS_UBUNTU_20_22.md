@@ -154,17 +154,24 @@ cd whazing
 unzip -o whazing.zip
 ```
 
+. garantir permisao das pastas
+
+```bash
+chmod 775 /home/deploy/whazing/ -Rf
+```
+
 23. descompactar logos
 
 ```bash
 unzip -o logos.zip
 ```
 
-24. garantir permisao das pastas
+. garantir permisao das pastas
 
 ```bash
 chmod 775 /home/deploy/whazing/ -Rf
 ```
+
 
 25. Copiar o env de exemplo para o backend
 ```bash 
@@ -558,3 +565,20 @@ Depois acesse novamente url http://seuip:9000/
 
 ## Atualizar
 
+01. Use usuario deploy
+
+```bash
+su deploy
+```
+
+02. Acesse pasta instalacao
+
+```bash
+cd /home/deploy/whazing
+```
+
+03. Acesse pasta instalacao
+
+```bash
+cd /home/deploy/whazing
+```
