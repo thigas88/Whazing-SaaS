@@ -11,6 +11,10 @@
 - Mensagens rápidas com anexos
 - Importação mensagens celular
 - Importação contatos
-- Entre outros instale e teste para verificar mais detalhes
 - Montagem de Bot estilo ChatFlow, com recursos como delay, envios audios arquivos, webhooks entre outros
 - WhiteLabel pelo Painel
+- Entre outros instale e teste para verificar mais detalhes
+
+
+
+Versão atual: 2.2.1
