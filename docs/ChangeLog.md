@@ -1,3 +1,11 @@
+Versão: 2.2.2
+
+- Caso desabilitar smtp ou opção solicitar teste agora botão esqueci senha e registre-se agora sai da pagina login
+- Correção erro na API
+- Envia mensagem para whatsapp cadastrar teste(caso whatsapp seja invalido não vai aceitar cadastrar teste)
+- Novas apis mostrar informação do Ticket, mostrar tickets no chatbot, mostrar todos tickets, troca de etiquetas, troca de filas, envio mensagens via metodo GET, alterar status ticket
+- Correção outros pequenos bugs
+
 Versão: 2.2.1
 
 - Correção geração protocolo, somente gerar quando solicitado
