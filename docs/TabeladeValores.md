@@ -11,7 +11,7 @@ Licença Premium por vps:
 
 - Adquirindo plano Premium 6 meses ou mais instalação grátis, planos menores R$ 50,00
 
-- Instação versão grátis R$ 100,00
+- Instalação versão grátis R$ 100,00
 
 - Sou obrigado adquirir a instalação?
 Não é opcional todo material necessário para instalar se encontra no repositório
