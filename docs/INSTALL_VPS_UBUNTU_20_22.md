@@ -173,6 +173,11 @@ chmod 775 /home/deploy/whazing/ -Rf
 ```
 
 
+. voltar pasta anterior
+```bash 
+cd ..
+```
+
 25. Copiar o env de exemplo para o backend
 ```bash 
 cp whazing/backend/.env.example whazing/backend/.env
