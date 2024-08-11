@@ -20,3 +20,5 @@ Não é opcional todo material necessário para instalar se encontra no reposit�
 # Valores não inclui manutenção da vps.
 
 Versão grátis unica limitação 10 usuarios e 2 canais
+
+# Quer revender? Temos desconto de acordo quantidade vps contratada.
