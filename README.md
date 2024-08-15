@@ -22,7 +22,7 @@ Caso apresente algum bug abra um Issues com maximo de detalhes possiveis
 
 **IMPORTANTE**: 
 
-- [Termos de USO](docs/Termos de Uso.md)
+- [Termos de USO](docs/TermosdeUso.md)
 
 Versão grátis* - para sempre não tera bloqueios
 
