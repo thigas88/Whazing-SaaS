@@ -21,6 +21,9 @@ admin@admin.com
 Caso apresente algum bug abra um Issues com maximo de detalhes possiveis
 
 **IMPORTANTE**: 
+
+- [Termos de USO](docs/Termos de Uso.md)
+
 Versão grátis* - para sempre não tera bloqueios
 
 - Limites da versão grátis 10 usuários e 2 canais
