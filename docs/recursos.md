@@ -13,8 +13,9 @@
 - Importação contatos
 - Montagem de Bot estilo ChatFlow, com recursos como delay, envios audios arquivos, webhooks entre outros
 - WhiteLabel pelo Painel
+- Tarefas
 - Entre outros instale e teste para verificar mais detalhes
 
 
 
-Versão atual: 2.2.2
+Versão atual: 2.2.3

@@ -1,3 +1,11 @@
+Versão: 2.2.3
+
+- Modulos tarefas
+- Bug envio audio IPHONE
+- Bug painel escutar audio IPHONE
+- Bug não tava exibindo mais de 40 usuarios
+- Correção outros pequenos bugs
+
 Versão: 2.2.2
 
 - Caso desabilitar smtp ou opção solicitar teste agora botão esqueci senha e registre-se agora sai da pagina login
