@@ -24,6 +24,10 @@ Caso apresente algum bug abra um Issues com maximo de detalhes possiveis
 
 - [Termos de USO](docs/TermosdeUso.md)
 
+- [Contrato de Licença](docs/contratodelicenca.md)
+
+
+
 Versão grátis* - para sempre não tera bloqueios
 
 - Limites da versão grátis 10 usuários e 2 canais
