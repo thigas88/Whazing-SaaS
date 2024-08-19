@@ -2,7 +2,7 @@
 
 Um sistema para gestão de atendimento multicanais centralizado.
 
-Esta versão foi trocada pela api [@whiskeysockets/baileys](https://github.com/WhiskeySockets/Baileys)
+Grupo whatsapp [Link do grupo](https://chat.whatsapp.com/KAk11eaAfRu6Bp13wQX6MB)
 
 Novos recursos
 - Painel SaaS
