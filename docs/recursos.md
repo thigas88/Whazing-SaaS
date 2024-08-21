@@ -18,4 +18,4 @@
 
 
 
-Versão atual: 2.2.3
+Versão atual: 2.2.4

@@ -1,3 +1,10 @@
+Versão: 2.2.4
+
+- Update lib não oficial baileys
+- Totalmente remodelado sistema importar mensagens ao ler QRCODE
+- Detectar mensagem apagada pelo contato
+- Integração com Mercado Pago
+
 Versão: 2.2.3
 
 - Modulos tarefas
