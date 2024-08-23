@@ -1,3 +1,7 @@
+Versão: 2.2.5
+
+- Atualização emergencia - Update lib não oficial baileys
+
 Versão: 2.2.4
 
 - Update lib não oficial baileys
