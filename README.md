@@ -2,7 +2,7 @@
 
 Um sistema para gestão de atendimento multicanais centralizado.
 
-Grupo whatsapp [Link do grupo](https://chat.whatsapp.com/KAk11eaAfRu6Bp13wQX6MB)
+[![Grupo do WhatsApp](https://img.shields.io/badge/WhatsApp-Grupo%20Whazing-brightgreen.svg)](https://chat.whatsapp.com/KAk11eaAfRu6Bp13wQX6MB)
 
 Novos recursos
 - Painel SaaS
