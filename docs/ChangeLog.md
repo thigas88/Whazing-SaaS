@@ -1,3 +1,24 @@
+Versão: 2.3.0
+
+- outros pequenos bugs
+- bug - Tela canais e atendimento listar mais de 40 usuários
+- bug - tarefa mesmo concluida aparecia ainda na notificações
+- bug - ajustes planos aceita planos com virgula no preço
+- Configuração mercado pago foi colocado detalhes do webhook
+- Atualização libs do backend e do frontend
+- Remoção conteudos não usados/defasados
+- Colocado Logo nos relatorios gerar impressão
+- Opção tirar som das notificações
+- Variveis adicionadas ({{user}}, {{phoneNumber}}, {{email}})
+- Novas configurações do banco de dados (para ajustes desempenho) via .env
+- Ajustes chaves para performace baileys
+- Exibir horario na lista de agendamentos
+- Sistema de avalição
+- Transcrição de audio
+- Configuração para quantidade tickets carregar tela atendimento(padrão 30)
+- Tela atendimento abas (Aberto, pedentes, fechados e bots aparece somente se tiver tickets) - mudado no filtro texto resolvidos para fechados para seguir mesmo padrão
+- Tela atendimento botão carregar mais tickets
+
 Versão: 2.2.5
 
 - Atualização emergencia - Update lib não oficial baileys

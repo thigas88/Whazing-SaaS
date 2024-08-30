@@ -4,7 +4,7 @@
 - Solicitar teste na pagina de login, e função esqueci a senha
 - Planos
 - Menu Ajuda
-- Integração bancaria recebimento PIX, verificar docs
+- Integração bancaria recebimento PIX, cartão de crédito (somente mercado pago), boleto (somente mercado pago)
 - Lista de Protocolos
 - Lista de Agendamentos
 - Tela atendimento com varios filtros, separação por grupos
@@ -14,8 +14,10 @@
 - Montagem de Bot estilo ChatFlow, com recursos como delay, envios audios arquivos, webhooks entre outros
 - WhiteLabel pelo Painel
 - Tarefas
+- Avaliações
+- Transcrição de audio
 - Entre outros instale e teste para verificar mais detalhes
 
 
 
-Versão atual: 2.2.4
+Versão atual: 2.3.0
