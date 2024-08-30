@@ -16,6 +16,8 @@
 - Tarefas
 - Avaliações
 - Transcrição de audio
+- Fechamento tickets em Massa
+- Apagar tickets em Massa
 - Entre outros instale e teste para verificar mais detalhes
 
 
