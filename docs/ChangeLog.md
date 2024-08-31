@@ -1,3 +1,7 @@
+Versão: 2.3.1
+
+- bug - adicionar novo canal nao aceitava
+
 Versão: 2.3.0
 
 - outros pequenos bugs

@@ -22,4 +22,4 @@
 
 
 
-Versão atual: 2.3.0
+Versão atual: 2.3.1
