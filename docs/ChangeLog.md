@@ -1,3 +1,10 @@
+Versão: 2.3.2
+
+- Suporte Asaas
+- Retirada campo CNPJ tela solicitar teste e Validação campos
+- Tela SaaS campo cnpj passa a ser opcional
+- Ao cadastra teste na pagina solicitação redireciona para pagina login
+
 Versão: 2.3.1
 
 - bug - adicionar novo canal nao aceitava
