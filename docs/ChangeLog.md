@@ -1,3 +1,9 @@
+Versão: 2.3.3
+
+- Bug cadastra empresa pelo painel sem CNPJ
+- Bug limite 40 usuarios alterar grupos chat interno
+- Silencioso não desativava
+
 Versão: 2.3.2
 
 - Suporte Asaas
