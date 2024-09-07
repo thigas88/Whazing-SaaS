@@ -1,3 +1,16 @@
+Versão: 2.3.4
+
+- Bug Assas - Cada vez gerava link novo agora usa o mesmo
+- Bug - Lista de contatos não carregava as etiquetas
+- Tirado coluna instagram e telegram tela contatos ficar mais limpa
+- Sistema de envio mensagem ao aceitar ticket e transferir ticket foi remodelado, as configurações agora são nos canais e será possivel personalizar mensagens
+- Botão resolver ticket na lista de tickets
+- Busca tela atendimento busca mensagens tambem
+- Envio de reações
+- Configuração para bloquear usuarios reabrir tickets fechados(Podem consultar mas não reabrir o mesmo)
+- Opção contatos para desativar bot ou campanha
+- Ajuste para exibir mensagem de erro ao tentar cadastrar contato sem ter whatsapp conectado
+
 Versão: 2.3.3
 
 - Bug cadastra empresa pelo painel sem CNPJ

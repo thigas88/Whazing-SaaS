@@ -18,8 +18,9 @@
 - Transcrição de audio
 - Fechamento tickets em Massa
 - Apagar tickets em Massa
+- Envio mensagens automaticas aceitar ou transferir ticket
 - Entre outros instale e teste para verificar mais detalhes
 
 
 
-Versão atual: 2.3.3
+Versão atual: 2.3.4
