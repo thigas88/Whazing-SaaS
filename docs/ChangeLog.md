@@ -1,3 +1,14 @@
+Versão: 2.3.5
+
+- bug - não carregar alguns tickets
+- bug - Não envia nome atentende aceitar ticket
+- bug - ajustes (Admin) - Visualizar Todos para melhor funcionamento
+- Separado opção quantidades tickets abertos/pedentes e fechados carregar tela de atendimento
+- Escolha cor canal para diferenciar tela atendimento
+- Botão reniciar as conexões no canais
+- Colocando sistema simular digitando e gravando audio para tornar atendimento mais humano
+- Suporte WebHook - N8N
+
 Versão: 2.3.4
 
 - Bug Assas - Cada vez gerava link novo agora usa o mesmo

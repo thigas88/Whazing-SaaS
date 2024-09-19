@@ -10,7 +10,8 @@ Novos recursos
 - Solicitar teste na pagina de login, e função esqueci a senha
 - Planos
 - Menu Ajuda
-- Integração bancaria recebimento PIX, verificar docs
+- Integração bancaria(mercado pago, assas, EFI) recebimento PIX, cartão e boleto verificar docs
+- Integração WebHook/N8N
 - [Mais informações de recursos](docs/recursos.md)
 
 Dados de Acesso

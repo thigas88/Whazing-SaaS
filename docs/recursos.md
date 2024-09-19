@@ -19,8 +19,10 @@
 - Fechamento tickets em Massa
 - Apagar tickets em Massa
 - Envio mensagens automaticas aceitar ou transferir ticket
+- Sistema simula digitando e gravando para diminuir chance de bloqueios do WhatsApp
+- Suporte WebHook - N8N
 - Entre outros instale e teste para verificar mais detalhes
 
 
 
-Versão atual: 2.3.4
+Versão atual: 2.3.5
