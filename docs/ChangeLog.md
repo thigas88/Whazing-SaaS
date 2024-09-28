@@ -1,3 +1,15 @@
+Versão: 2.4.0
+
+- bug - botao enviar mensagem e audio tinha clicar lado meio nao funciona - obrigado Felipe
+- bug - Ao clicar ticket nao exibia cor do canal e sem clicar nao exibia nome do usuario
+- bug - Responder audio com transcrição perdia a resposta, pois fazia transcrição novamente
+- Menu saas da empresa foi colocado opção para listar Faturas em aberto para apagar ou marcar como pagas
+- Integração TypeBot
+- Melhorias internas da integração baileys
+- Alteração Menu para abrir descrição no computador - melhorias nesse menu pelo Felipe
+- Alteração do Chat Interno e tela atendimento para tela cheia
+- Novas configurações disponiveis .env, verifica .example da pasta backend
+
 Versão: 2.3.5
 
 - bug - não carregar alguns tickets

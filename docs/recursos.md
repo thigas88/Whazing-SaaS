@@ -21,6 +21,7 @@
 - Envio mensagens automaticas aceitar ou transferir ticket
 - Sistema simula digitando e gravando para diminuir chance de bloqueios do WhatsApp
 - Suporte WebHook - N8N
+- Suporte TypeBot
 - Entre outros instale e teste para verificar mais detalhes
 
 
