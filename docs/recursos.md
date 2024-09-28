@@ -20,10 +20,10 @@
 - Apagar tickets em Massa
 - Envio mensagens automaticas aceitar ou transferir ticket
 - Sistema simula digitando e gravando para diminuir chance de bloqueios do WhatsApp
-- Suporte WebHook - N8N
-- Suporte TypeBot
+- Integração WebHook - N8N
+- Integração TypeBot
 - Entre outros instale e teste para verificar mais detalhes
 
 
 
-Versão atual: 2.3.5
+Versão atual: 2.4.0
