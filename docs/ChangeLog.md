@@ -1,3 +1,9 @@
+Versão: 2.4.1
+
+- Melhoria TypeBot caso transcrição audio estiver ativa transmite resultado para o typebot
+- Novas opções TypeBot, transferir ticket, fechar ticket, colocar tag, parar ver arquivo docs
+
+
 Versão: 2.4.0
 
 - bug - botao enviar mensagem e audio tinha clicar lado meio nao funciona - obrigado Felipe
