@@ -40,8 +40,6 @@ Versão Premium*
 
 -  [Tabela de Valores versão premium e serviço de instalação](docs/TabeladeValores.md)
 
-Será iniciado cobranças a partir de 01/10/2024 caso você tenha sistema instalado com mais 10 usuários ou 2 canais adquira licença antes dessa data.
-
 ## Screenshots
 >![print](screenshots/saas.png) 
 ___  
