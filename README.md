@@ -29,9 +29,11 @@ Caso apresente algum bug abra um Issues com maximo de detalhes possiveis
 
 
 
-Versão grátis* - para sempre não tera bloqueios
+Versão grátis*
 
-- Limites da versão grátis 10 usuários e 2 canais
+- Limites da versão grátis 
+- 10 usuários
+- 2 canais
 
 
 Versão Premium*
