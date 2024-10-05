@@ -11,7 +11,7 @@ Novos recursos
 - Planos
 - Menu Ajuda
 - Integração bancaria(mercado pago, assas, EFI) recebimento PIX, cartão e boleto verificar docs
-- Integração WebHook/N8N - TypeBot
+- Integração WebHook/N8N - TypeBot - Groq - ChatGPT
 - [Mais informações de recursos](docs/recursos.md)
 
 Dados de Acesso
