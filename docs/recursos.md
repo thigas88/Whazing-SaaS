@@ -20,10 +20,13 @@
 - Apagar tickets em Massa
 - Envio mensagens automaticas aceitar ou transferir ticket
 - Sistema simula digitando e gravando para diminuir chance de bloqueios do WhatsApp
+- Mensagem despedida personalizavel por usuario
 - Integração WebHook - N8N
 - Integração TypeBot
+- Integração ChatGPT responder mensagens e Microsoft Azure Text-to-Speech para responder com audios
+- Integração Groq responder mensagens e Microsoft Azure Text-to-Speech para responder com audios
 - Entre outros instale e teste para verificar mais detalhes
 
 
 
-Versão atual: 2.4.0
+Versão atual: 2.5.0
