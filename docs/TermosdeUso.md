@@ -12,7 +12,7 @@ Nosso sistema inclui um validador de licença que coleta informações específi
 
 O software está disponível em duas versões: Grátis e Premium.
 
-- **Versão Grátis**: Esta versão do software é oferecida gratuitamente. No entanto, ela possui limitações de uso, incluindo o máximo de 10 usuários e 2 canais. A versão grátis é oferecida sem qualquer garantia de suporte ou atualizações.
+- **Versão Grátis**: Esta versão do software é oferecida gratuitamente. No entanto, ela possui limitações de uso, incluindo o máximo de 10 usuários e 2 canais, somente suporte canal whatsapp. A versão grátis é oferecida sem qualquer garantia de suporte ou atualizações.
 
 - **Versão Premium**: A versão premium do software não possui os limites presentes na versão grátis. A utilização desta versão está sujeita ao pagamento de uma taxa de licença, conforme os termos estabelecidos no contrato de licença.
 

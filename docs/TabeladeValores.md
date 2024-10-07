@@ -24,10 +24,11 @@ Versão grátis*
 - Limites da versão grátis 
 - 10 usuários
 - 2 canais
-
+- Somente suporte WhatsApp Api Bayles
 
 Versão Premium*
 
 -Não posso possui limites
+-Suporte facebook e instagram via HUB
 
 # Quer revender? Temos desconto de acordo quantidade vps contratada.
