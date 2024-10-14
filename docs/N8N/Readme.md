@@ -1,4 +1,4 @@
-# Instalat N8N mesma VPS WHAZING
+# Instalar N8N mesma VPS WHAZING
 
 Ter dns apontados
 # Domínios
