@@ -1,4 +1,4 @@
-# Instalat Typebot mesma VPS WHAZING
+# Instalar Typebot mesma VPS WHAZING
 
 Tutorial com muitos detalhes então preste bastante atenção e veja o video que me baseado pra fazer o mesmo, para ajudar entender melhor os passos. Lembrando no video ele usa traefik e alteramos usar nginx para ser compativel mesma vps whazing
 
