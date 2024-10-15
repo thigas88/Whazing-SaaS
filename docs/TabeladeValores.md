@@ -16,6 +16,8 @@ Licença Premium por vps:
 - Sou obrigado adquirir a instalação?
 Não é opcional todo material necessário para instalar se encontra no repositório
 
+- Serviço adicional instação na mesma vps do Typebot e N8N R$ 100,00
+
 
 # Valores não inclui manutenção da vps.
 
