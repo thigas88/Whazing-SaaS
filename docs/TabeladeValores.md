@@ -30,7 +30,7 @@ Versão grátis*
 
 Versão Premium*
 
--Não posso possui limites
--Suporte facebook e instagram via HUB
+- Não posso possui limites
+- Suporte facebook e instagram via HUB
 
 # Quer revender? Temos desconto de acordo quantidade vps contratada.
