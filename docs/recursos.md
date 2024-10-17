@@ -29,4 +29,4 @@
 
 
 
-Versão atual: 2.5.0
+Versão atual: 2.5.1

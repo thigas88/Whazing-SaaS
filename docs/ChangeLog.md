@@ -1,3 +1,8 @@
+Versão: 2.5.1
+
+- bug - greeting nao tava mais funcionando
+- bug - Erro criar contatos confrito entre empresas
+
 Versão: 2.5.0
 
 - bug - Clicar ticket pendente todas opções do topo estavam habilitadas
