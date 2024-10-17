@@ -54,7 +54,7 @@ ___
 
 ## Videos gravador por um cliente da prataforma
 
--  [Videos](http://www.youtube.com/@ZAPPRO-z4i)
+-  [Videos](https://www.youtube.com/@ZAPPRO-z4i/videos)
  
 ## Instalando
 Seguem links sugerimos:
