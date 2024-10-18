@@ -1,7 +1,7 @@
 Versão: 2.5.1
 
 - bug - greeting nao tava mais funcionando
-- bug - Erro criar contatos confrito entre empresas
+- bug - Erro criar contatos conflito entre empresas
 
 Versão: 2.5.0
 
