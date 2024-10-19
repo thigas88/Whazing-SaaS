@@ -12,6 +12,7 @@ Novos recursos
 - Menu Ajuda
 - Integração bancaria(mercado pago, assas, EFI) recebimento PIX, cartão e boleto verificar docs
 - Integração WebHook/N8N - TypeBot - Groq - ChatGPT
+- Suporte facebook e instagram  e WebChat via hub (função exclusiva versão premium)
 - [Mais informações de recursos](docs/recursos.md)
 
 Dados de Acesso
@@ -35,11 +36,13 @@ Versão grátis*
 - 10 usuários
 - 2 canais
 - Somente suporte WhatsApp Api Bayles
+- Verificar premium abaixo para saber diferenças
 
 Versão Premium*
 
-- Não posso possui limites
+- Não possui limites
 - Suporte facebook e instagram via HUB
+- Kanban
 
 -  [Tabela de Valores versão premium e serviço de instalação](docs/TabeladeValores.md)
 

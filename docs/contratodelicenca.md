@@ -34,9 +34,10 @@ O Licenciado não é obrigado a adquirir os serviços de instalação oferecidos
 **5. Limitações da Versão Grátis**
 
 A Versão Grátis do software possui as seguintes limitações:
-- Limite de 10 usuários.
-- Limite de 2 canais.
+- 10 usuários
+- 2 canais
 - Somente suporte WhatsApp Api Bayles
+- Entre outros limites
 
 **6. Manutenção da VPS**
 

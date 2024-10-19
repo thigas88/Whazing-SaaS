@@ -27,10 +27,12 @@ Versão grátis*
 - 10 usuários
 - 2 canais
 - Somente suporte WhatsApp Api Bayles
+- Verificar premium abaixo para saber diferenças
 
 Versão Premium*
 
-- Não posso possui limites
+- Não possui limites
 - Suporte facebook e instagram via HUB
+- Kanban
 
 # Quer revender? Temos desconto de acordo quantidade vps contratada.
