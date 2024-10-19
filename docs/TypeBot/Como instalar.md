@@ -411,4 +411,52 @@ sudo certbot --nginx
 sudo iptables -t nat -A POSTROUTING ! -o docker0 -s 172.18.0.0/16 -j MASQUERADE
 ```
 
+- Criar pasta para um script executar comando inicializacao
+```bash
+sudo mkdir /etc/iptables
+```
+
+- Criar um script executar comando inicializacao
+```bash
+sudo nano /etc/iptables/rules.sh
+```
+
+- crie arquivo como exemplo abaixo coloque todas linhas necessarias pode ter mais de uma se tiver varios doccker como exemplo abaixo
+```bash
+#!/bin/bash
+
+# Regras NAT
+iptables -t nat -A POSTROUTING ! -o docker0 -s 172.17.0.0/16 -j MASQUERADE
+iptables -t nat -A POSTROUTING ! -o docker0 -s 172.18.0.0/16 -j MASQUERADE
+iptables -t nat -A POSTROUTING ! -o docker0 -s 172.19.0.0/16 -j MASQUERADE
+iptables -t nat -A POSTROUTING ! -o docker0 -s 172.20.0.0/16 -j MASQUERADE
+```
+
+- tornar arquivo executavel
+```bash
+sudo chmod +x /etc/iptables/rules.sh
+```
+
+- Executar script
+```bash
+sudo /etc/iptables/rules.sh
+```
+
+- Configurar o Script para Executar na Inicialização
+```bash
+sudo nano /etc/rc.local
+```
+
+- Adiciona no rc.local como exemplo
+```bash
+# Aplicar regras de iptables na inicialização
+sudo /etc/iptables/rules.sh
+```
+
+- tonar executavel
+```bash
+# Aplicar regras de iptables na inicialização
+sudo chmod +x /etc/rc.local
+```
+
 - Errei ou quero alterar algo so alterar dados na stack na opcao editor e escolher update stack 
