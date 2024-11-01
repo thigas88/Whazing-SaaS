@@ -55,6 +55,10 @@ ___
 >![print](screenshots/solicitarteste.png)
 ___
 
+## Manual feito por um cliente da prataforma
+
+-  [Manual](https://ajuda.super-zapp.com.br/)
+
 ## Videos gravador por um cliente da prataforma
 
 -  [Videos](https://www.youtube.com/@ZAPPRO-z4i/videos)
