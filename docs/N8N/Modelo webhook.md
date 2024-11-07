@@ -1,4 +1,4 @@
-# Será enviado cada vez receber uma nova mensagem ou enviada, segue abaixo estrutura enviada, se tiver alguma sugestao de mais alguma informação que deve ser enviada solicite um "issues"
+# Será enviado metodo POST cada vez receber uma nova mensagem ou enviada, segue abaixo estrutura enviada, se tiver alguma sugestao de mais alguma informação que deve ser enviada solicite um "issues"
 
     const dataToSend = {
       messageId: message.messageId,
