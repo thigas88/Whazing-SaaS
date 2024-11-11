@@ -268,7 +268,7 @@ networks:
     name: typebot_rede
 ```
 
-- Agora vamos voltar Portainer - "Stacks" - "Add Stack" - typebot_viewer
+- Agora vamos voltar Portainer - "Stacks" - "Add Stack" - typebot_builder
 - Web editor - Coloque conteudo abaixo - alterar com dados email, semelhante o que você fez antes etc para funcionar - no campos S3 vai colocar dados que você gerou acima
 
 ```bash
