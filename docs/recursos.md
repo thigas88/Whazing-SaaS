@@ -26,8 +26,9 @@
 - Integração ChatGPT responder mensagens e Microsoft Azure Text-to-Speech para responder com audios
 - Integração Groq responder mensagens e Microsoft Azure Text-to-Speech para responder com audios
 - Suporte facebook e instagram  e WebChat via hub (função exclusiva versão premium)
+- KANBAN (função exclusiva versão premium)
 - Entre outros instale e teste para verificar mais detalhes
 
 
 
-Versão atual: 2.6.0
+Versão atual: 2.7.3

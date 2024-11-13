@@ -13,6 +13,7 @@ Novos recursos
 - Integração bancaria(mercado pago, assas, EFI) recebimento PIX, cartão e boleto verificar docs
 - Integração WebHook/N8N - TypeBot - Groq - ChatGPT
 - Suporte facebook e instagram  e WebChat via hub (função exclusiva versão premium)
+- KANBAN (função exclusiva versão premium)
 - [Mais informações de recursos](docs/recursos.md)
 
 Dados de Acesso
@@ -53,6 +54,8 @@ ___
 ___
 
 >![print](screenshots/solicitarteste.png)
+
+>![print](screenshots/kanban.png)
 ___
 
 ## Manual feito por um cliente da prataforma
