@@ -11,19 +11,15 @@ cd ./whazinginstalador
 ```
 ```bash
 sudo ./whazing
+```
 
 
-RODAR OS COMANDOS ABAIXO PARA REINICAR PM2
+### RODAR OS COMANDOS ABAIXO PARA REINICAR Whazing 
 
 ```bash
 su deploy
 ```
-```bash
-pm2 stop all
-```
+
 ```bash
 pm2 restart all
-```
-```bash
-pm2 reload all
 ```
