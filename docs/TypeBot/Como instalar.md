@@ -449,14 +449,60 @@ sudo nano /etc/rc.local
 
 - Adiciona no rc.local como exemplo
 ```bash
-# Aplicar regras de iptables na inicialização
+#!/bin/bash
 sudo /etc/iptables/rules.sh
 ```
 
 - tonar executavel
 ```bash
-# Aplicar regras de iptables na inicialização
 sudo chmod +x /etc/rc.local
 ```
+
+- vericar status rc.local
+```bash
+sudo systemctl status rc-local
+```
+
+- Caso nao tenha rc.local ativado verificar abaixo.
+https://www.lw92.me/index.php/archives/550
+
+- create a systemd service
+```bash
+sudo nano /etc/systemd/system/rc-local.service
+```
+
+- Colocar dados abaixo no arquivo acima
+```bash
+[Unit]
+Description=Local Startup Script
+
+[Service]
+Type=simple
+ExecStart=/etc/rc.local
+
+[Install]
+WantedBy=multi-user.target
+```
+
+- Tornar executavel
+```bash
+sudo chmod 644 /etc/systemd/system/rc-local.service
+```
+
+- Ativar
+```bash
+sudo systemctl enable rc-local.service
+```
+
+- Iniciar
+```bash
+sudo systemctl start rc-local.service
+```
+
+- Verificar Status
+```bash
+sudo systemctl status rc-local.service
+```
+
 
 - Errei ou quero alterar algo so alterar dados na stack na opcao editor e escolher update stack 
