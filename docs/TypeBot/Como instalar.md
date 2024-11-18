@@ -234,7 +234,7 @@ services:
       - NEXTAUTH_URL=https://chatbot.webconfiavel.com.br
       - NEXT_PUBLIC_VIEWER_URL=https://chatbotapi.webconfiavel.com.br
       - NEXTAUTH_URL_INTERNAL=http://localhost:3000
-      - DISABLE_SIGNUP=false
+      - DISABLE_SIGNUP=true
       - ADMIN_EMAIL=sourodmil@gmail.com
       - NEXT_PUBLIC_SMTP_FROM='RWeb Tec' <sourodmil@gmail.com>
       - SMTP_AUTH_DISABLED=false
@@ -288,7 +288,7 @@ services:
       - NEXTAUTH_URL=https://chatbot.webconfiavel.com.br
       - NEXT_PUBLIC_VIEWER_URL=https://chatbotapi.webconfiavel.com.br
       - NEXTAUTH_URL_INTERNAL=http://localhost:3000
-      - DISABLE_SIGNUP=false
+      - DISABLE_SIGNUP=true
       - ADMIN_EMAIL=sourodmil@gmail.com
       - NEXT_PUBLIC_SMTP_FROM='RWeb Tec' <sourodmil@gmail.com>
       - SMTP_AUTH_DISABLED=false
