@@ -11,7 +11,7 @@ Novos recursos
 - Planos
 - Menu Ajuda
 - Integração bancaria(mercado pago, assas, EFI) recebimento PIX, cartão e boleto verificar docs
-- Integração WebHook/N8N - TypeBot - Groq - ChatGPT
+- Integração WebHook/N8N - TypeBot - Groq - ChatGPT (função exclusiva versão premium)
 - Suporte facebook e instagram  e WebChat via hub (função exclusiva versão premium)
 - KANBAN (função exclusiva versão premium)
 - [Mais informações de recursos](docs/recursos.md)

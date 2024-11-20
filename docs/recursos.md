@@ -21,10 +21,10 @@
 - Envio mensagens automaticas aceitar ou transferir ticket
 - Sistema simula digitando e gravando para diminuir chance de bloqueios do WhatsApp
 - Mensagem despedida personalizavel por usuario
-- Integração WebHook - N8N
-- Integração TypeBot
-- Integração ChatGPT responder mensagens e Microsoft Azure Text-to-Speech para responder com audios
-- Integração Groq responder mensagens e Microsoft Azure Text-to-Speech para responder com audios
+- Integração WebHook - N8N (função exclusiva versão premium)
+- Integração TypeBot (função exclusiva versão premium)
+- Integração ChatGPT responder mensagens e Microsoft Azure Text-to-Speech para responder com audios (função exclusiva versão premium)
+- Integração Groq responder mensagens e Microsoft Azure Text-to-Speech para responder com audios (função exclusiva versão premium)
 - Suporte facebook e instagram  e WebChat via hub (função exclusiva versão premium)
 - KANBAN (função exclusiva versão premium)
 - Entre outros instale e teste para verificar mais detalhes
