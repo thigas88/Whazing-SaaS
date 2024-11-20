@@ -44,6 +44,7 @@ Versão Premium*
 - Não possui limites
 - Suporte facebook e instagram via HUB
 - Kanban
+- Integração WebHook/N8N - TypeBot - Groq - ChatGPT
 
 -  [Tabela de Valores versão premium e serviço de instalação](docs/TabeladeValores.md)
 
