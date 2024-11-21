@@ -1,0 +1,117 @@
+networks:
+  whazing:
+
+services:
+  redis:
+    container_name: "redis"
+    image: "redis:alpine"
+    restart: "unless-stopped"
+    command: redis-server --appendonly yes --replica-read-only no
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - "6379:6379"
+    env_file:
+      - ./backend/.env
+    volumes:
+      - ".data/redis:/data"
+    networks:
+      - whazing
+
+  # database containers, one for each db
+  pg_fixPermissions:
+    image: "bitnami/postgresql:14"
+    user: root
+    command: chown -R 1001:1001 /bitnami/postgresql
+    volumes:
+      - ".data/pg:/bitnami/postgresql/data"
+    networks:
+      - whazing
+
+  postgres:
+    image: "bitnami/postgresql:14"
+    restart: "unless-stopped"
+    container_name: "pg"
+    env_file:
+      - ./backend/.env
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ".data/pg:/bitnami/postgresql/data"
+    ports:
+      - "5432:5432"
+    depends_on:
+      - pg_fixPermissions
+    networks:
+      - whazing
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    hostname: rabbitmq
+    container_name: "rabbitmq"
+    restart: "unless-stopped"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    env_file:
+      - ./backend/.env
+    volumes:
+      - .data/rabbitmq/data/:/var/lib/rabbitmq/
+      - .data/rabbitmq/logs/:/var/log/rabbitmq/log
+    ports:
+      - 5672:5672
+      - 15672:15672
+    networks:
+      - whazing
+
+  api:
+    image: whazing-api
+    build:
+      context: .
+      dockerfile: ./backend/Dockerfile
+      target: development-stage
+    restart: "unless-stopped"
+    container_name: "api"
+    env_file:
+      - ./backend/.env
+    stdin_open: true
+    tty: true
+    # command: "npm install --force && npx sequelize db:migrate && pm2 start ./dist/server.js --name whazing-backend --watch"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      - redis
+      - postgres
+      - rabbitmq
+    ports:
+      - "3100:3100"
+      - "3000:3000"
+    volumes:
+      - ./backend:/app
+    networks:
+      - whazing
+
+  frontend:
+    image: whazing-frontend
+    build:
+      context: .
+      dockerfile: ./frontend/Dockerfile
+      target: development-stage
+    restart: "unless-stopped"
+    container_name: "frontend"
+    env_file:
+      - ./frontend/.env
+    stdin_open: true
+    tty: true
+    # command: "pm2 start server.js --name whazing-frontend --watch"  # "npm run start"  # pm2 start server.js --name whazing-frontend
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      - redis
+      - postgres
+      - rabbitmq
+    ports:
+      - "3003:3003"
+    volumes:
+      - ./frontend:/app
+    networks:
+      - whazing

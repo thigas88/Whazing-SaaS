@@ -5,11 +5,9 @@ public/*
 .env
 .env.test
 .cache
+.data
 logs/
 WWebJS/
-
-backend/
-frontend/
 
 yarn.lock
 yarn-error.log
