@@ -34,5 +34,6 @@ Versão Premium*
 - Não possui limites
 - Suporte facebook e instagram via HUB
 - Kanban
+- Integração WebHook/N8N - TypeBot - Groq - ChatGPT
 
 # Quer revender? Temos desconto de acordo quantidade vps contratada.
