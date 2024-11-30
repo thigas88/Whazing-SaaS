@@ -107,6 +107,11 @@ export default {
       this.integracoes = data
     },
     formatIntegracao(integracaoId) {
+      if (!Array.isArray(this.integracoes)) {
+        console.error('this.integracoes não é um array:', this.integracoes)
+        return ''
+      }
+
       const integracao = this.integracoes.find(integracao => integracao.id === integracaoId)
       return integracao ? integracao.name : ''
     },
