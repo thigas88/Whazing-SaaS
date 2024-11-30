@@ -2,8 +2,8 @@
   "name": "whazing-frontend",
   "version": "2.7.3",
   "description": "Bot Multiatendimento, multicanais e multiempresas.",
-  "productName": "Whazing",
-  "author": "cleitonme <cleitonme@gmail.com>",
+  "productName": "WhatsFlow",
+  "author": "Thiago Mendes <thigas88@gmail.com>",
   "private": false,
   "scripts": {
     "fix": "eslint --ext .js,.vue ./ --fix",
